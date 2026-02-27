@@ -11,7 +11,7 @@ import { playwright } from '@vitest/browser-playwright';
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+// More info at: https://storybook.js.org/docs/writing-tests/vitest-plugin
 export default defineConfig({
   plugins: [react()],
   test: {
@@ -31,7 +31,7 @@ export default defineConfig({
         extends: true,
         plugins: [
           // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          // See options at: https://storybook.js.org/docs/writing-tests/vitest-plugin#storybooktest
           storybookTest({ configDir: path.join(dirname, '.storybook') }),
         ],
         test: {
