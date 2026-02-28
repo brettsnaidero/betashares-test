@@ -165,7 +165,7 @@ function Combobox<T>({
             onKeyDown={handleKeyDown}
           />
           <AnimatePresence>
-            {isLoading && (
+            {hasItems && (isLoading || !isLoadingComplete) ? (
               <motion.span
                 className={styles.inlineSpinner}
                 initial={{ opacity: 0 }}
@@ -174,9 +174,9 @@ function Combobox<T>({
                 transition={{ duration: 0.15 }}
                 aria-hidden="true"
               >
-                <LoadingSpinner size={16} />
+                <LoadingSpinner />
               </motion.span>
-            )}
+            ) : null}
           </AnimatePresence>
         </div>
 
@@ -205,7 +205,6 @@ function Combobox<T>({
                           className={styles.loading}
                         >
                           <LoadingIllustration
-                            size={24}
                             className={styles.loadingIllustration}
                           />
                         </motion.div>

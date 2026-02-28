@@ -10,22 +10,22 @@
 }
 
 .circle {
+  stroke: rgb(var(--color-off-white));
   transform-origin: 25px 25px;
-  animation: circleGrow 2s linear infinite;
 }
 
-@keyframes circleGrow {
+.path {
+  stroke: rgb(var(--color-orange));
+  transform-origin: 25px 25px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
   0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(0.5);
-    opacity: 0.5;
+    transform: rotate(0deg);
   }
   100% {
-    transform: scale(1);
-    opacity: 1;
+    transform: rotate(360deg);
   }
 }
 

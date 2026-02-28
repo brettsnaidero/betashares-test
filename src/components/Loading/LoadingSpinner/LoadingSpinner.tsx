@@ -6,7 +6,7 @@ export interface LoadingSpinnerProps {
   className?: string;
 }
 
-export function LoadingSpinner({ size = 48, className }: LoadingSpinnerProps) {
+export function LoadingSpinner({ size = 40, className }: LoadingSpinnerProps) {
   return (
     <div
       className={`${styles.wrapper} ${className ?? ""}`}
@@ -14,8 +14,8 @@ export function LoadingSpinner({ size = 48, className }: LoadingSpinnerProps) {
       aria-label="Loading"
     >
       <svg
-        width="50"
-        height="50"
+        width={size}
+        height={size}
         viewBox="0 0 50 50"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,17 @@ export function LoadingSpinner({ size = 48, className }: LoadingSpinnerProps) {
           cx="25"
           cy="25"
           r="10"
-          fill="#FA4D16"
+          strokeWidth="2px"
+        />
+        <circle
+          className={styles.path}
+          cx="25"
+          cy="25"
+          r="10"
+          strokeWidth="2px"
+          // strokeDasharray is 3/4 circumference of the circle (2 * π * r)
+          strokeDasharray={(Math.PI * 2 * 10 * 0.75).toFixed(2)}
+          strokeLinecap="round"
         />
       </svg>
       <span className={styles.srOnly}>Loading...</span>
