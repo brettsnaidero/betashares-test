@@ -194,44 +194,59 @@ function Combobox<T>({
                   transition={{ duration: 0.15, ease: "easeOut" }}
                 >
                   <ComboboxPrimitive.Popup className={styles.popup}>
-                    {!hasItems && (isLoading || !isLoadingComplete) ? (
-                      <div className={styles.loading}>
-                        <LoadingIllustration
-                          size={24}
-                          className={styles.loadingIllustration}
-                        />
-                      </div>
-                    ) : (
-                      <>
-                        <ComboboxPrimitive.List className={styles.list}>
-                          {groups.length > 0
-                            ? groups.map((group) =>
-                                group.items.length > 0 ? (
-                                  <ComboboxPrimitive.Group
-                                    key={group.label}
-                                    className={styles.group}
-                                  >
-                                    <ComboboxPrimitive.GroupLabel
-                                      className={styles.groupLabel}
+                    <AnimatePresence mode="wait">
+                      {!hasItems && (isLoading || !isLoadingComplete) ? (
+                        <motion.div
+                          key="loading"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className={styles.loading}
+                        >
+                          <LoadingIllustration
+                            size={24}
+                            className={styles.loadingIllustration}
+                          />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="results"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ComboboxPrimitive.List className={styles.list}>
+                            {groups.length > 0
+                              ? groups.map((group) =>
+                                  group.items.length > 0 ? (
+                                    <ComboboxPrimitive.Group
+                                      key={group.label}
+                                      className={styles.group}
                                     >
-                                      {group.label}
-                                    </ComboboxPrimitive.GroupLabel>
-                                    {group.items.map(renderItemNode)}
-                                  </ComboboxPrimitive.Group>
-                                ) : null
-                              )
-                            : items.map(renderItemNode)}
-                        </ComboboxPrimitive.List>
+                                      <ComboboxPrimitive.GroupLabel
+                                        className={styles.groupLabel}
+                                      >
+                                        {group.label}
+                                      </ComboboxPrimitive.GroupLabel>
+                                      {group.items.map(renderItemNode)}
+                                    </ComboboxPrimitive.Group>
+                                  ) : null
+                                )
+                              : items.map(renderItemNode)}
+                          </ComboboxPrimitive.List>
 
-                        {isLoadingComplete &&
-                          !hasItems &&
-                          inputValueRef.current.trim() !== "" && (
-                            <ComboboxPrimitive.Empty className={styles.empty}>
-                              {emptyMessage}
-                            </ComboboxPrimitive.Empty>
-                          )}
-                      </>
-                    )}
+                          {isLoadingComplete &&
+                            !hasItems &&
+                            inputValueRef.current.trim() !== "" && (
+                              <ComboboxPrimitive.Empty className={styles.empty}>
+                                {emptyMessage}
+                              </ComboboxPrimitive.Empty>
+                            )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </ComboboxPrimitive.Popup>
                 </motion.div>
               )}
