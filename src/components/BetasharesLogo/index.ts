@@ -1,0 +1,1 @@
+export { BetasharesLogo } from "./BetasharesLogo";

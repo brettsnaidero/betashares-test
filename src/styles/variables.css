@@ -1,0 +1,21 @@
+:root {
+  --color-orange: 252 77 22;
+  --color-orange-light: 255 98 49;
+  --color-off-white: 240 237 235;
+  --color-pale-white: 249 246 244;
+  --color-tinted-black: 9 9 10;
+  --color-almost-black: 32 32 33;
+  --color-gray: 95 89 100;
+  --color-detail: 174 174 174;
+  --color-dark-gray: 64 64 64;
+  --color-darkest-gray: 41 41 41;
+  --color-salmon: 253 166 138;
+  --color-platinum: 237 225 223;
+
+  /* Spacing */
+  --gutter: 1.75rem;
+
+  /* Fonts */
+  --font-heading: "Rund Display", sans-serif;
+  --font-text: "Rund Text", sans-serif;
+}
