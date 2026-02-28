@@ -14,6 +14,8 @@
 .icon {
   position: absolute;
   left: var(--spacing-6);
+  top: 0;
+  height: 100%;
   display: flex;
   align-items: center;
   color: rgb(var(--color-gray));
@@ -38,6 +40,20 @@
 
 .inputWithIcon {
   padding-left: 40px;
+}
+
+.inputWithSpinner {
+  padding-right: 40px;
+}
+
+/* Inline loading spinner (right side of input) */
+.inlineSpinner {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: rgb(var(--color-gray));
 }
 
 .input::placeholder {
@@ -80,11 +96,11 @@
   font-size: var(--font-size-base);
   line-height: var(--leading-snug);
   color: rgb(var(--color-almost-black));
-  transition: background-color 0.1s ease;
+  transition: background-color var(--transition-fast);
 }
 
 .item[data-highlighted] {
-  background-color: rgba(var(--color-orange), 0.08);
+  background-color: rgba(var(--color-off-white));
 }
 
 .item[data-selected] {
@@ -117,14 +133,8 @@
   color: rgb(var(--color-gray));
 }
 
-.spinner {
-  display: inline-block;
-  width: var(--size-2);
-  height: var(--size-2);
-  border: 2px solid rgb(var(--color-detail));
-  border-top-color: rgb(var(--color-orange));
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+.loadingIllustration {
+  display: block;
 }
 
 @keyframes spin {

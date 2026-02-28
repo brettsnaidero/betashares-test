@@ -53,7 +53,7 @@
   --size-3: 20px;
   --size-4: 32px;
   --size-5: 36px;
-  --size-6: 80px;
+  --size-6: 48px;
 
   /* Shadows */
   --shadow-1: 0 1px 4px rgba(0, 0, 0, 0.04);
@@ -78,6 +78,11 @@
   --width-search: 480px;
   --width-card-min: 300px;
   --width-sidebar: 260px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-medium: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
 
   /* Other */
   --gutter: var(--spacing-14);

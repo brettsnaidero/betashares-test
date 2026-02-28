@@ -1,10 +1,17 @@
 "use client";
 
-import { type ReactNode, useCallback, useRef } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cn from "classnames";
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
+import { AnimatePresence, motion } from "motion/react";
 import styles from "./Combobox.module.css";
-import { LoadingSpinner } from "../LoadingSpinner";
+import { LoadingIllustration, LoadingSpinner } from "../Loading";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -79,6 +86,22 @@ function Combobox<T>({
   const groups = "groups" in rest && rest.groups ? rest.groups : [];
   const hasItems = items.length > 0 || groups.some((g) => g.items.length > 0);
   const inputValueRef = useRef("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const wasLoadingRef = useRef(false);
+
+  useEffect(() => {
+    if (isLoading) {
+      wasLoadingRef.current = true;
+    } else if (wasLoadingRef.current) {
+      wasLoadingRef.current = false;
+      setIsLoadingComplete(true);
+    }
+  }, [isLoading]);
+
+  const handleOpenChange = useCallback((open: boolean) => {
+    setIsOpen(open && inputValueRef.current.trim() !== "");
+  }, []);
 
   const handleValueChange = useCallback(
     (value: T | null) => {
@@ -90,6 +113,9 @@ function Combobox<T>({
   const handleInputValueChange = useCallback(
     (value: string) => {
       inputValueRef.current = value;
+      setIsOpen(value.trim() !== "");
+      setIsLoadingComplete(false);
+      wasLoadingRef.current = false;
       onInputValueChange(value);
     },
     [onInputValueChange]
@@ -119,6 +145,8 @@ function Combobox<T>({
       value={null}
       onValueChange={handleValueChange}
       onInputValueChange={handleInputValueChange}
+      open={isOpen}
+      onOpenChange={handleOpenChange}
     >
       <div className={cn(styles.root, className)}>
         <div className={styles.inputWrapper}>
@@ -128,55 +156,86 @@ function Combobox<T>({
             </span>
           )}
           <ComboboxPrimitive.Input
-            className={cn(styles.input, { [styles.inputWithIcon]: !!icon })}
+            className={cn(styles.input, {
+              [styles.inputWithIcon]: !!icon,
+              [styles.inputWithSpinner]: isLoading,
+            })}
             placeholder={placeholder}
             aria-label={ariaLabel}
             onKeyDown={handleKeyDown}
           />
+          <AnimatePresence>
+            {isLoading && (
+              <motion.span
+                className={styles.inlineSpinner}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                aria-hidden="true"
+              >
+                <LoadingSpinner size={16} />
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
 
-        <ComboboxPrimitive.Portal>
+        <ComboboxPrimitive.Portal keepMounted>
           <ComboboxPrimitive.Positioner
             className={styles.positioner}
             sideOffset={4}
           >
-            <ComboboxPrimitive.Popup className={styles.popup}>
-              {isLoading && !hasItems ? (
-                <div className={styles.loading}>
-                  <LoadingSpinner size={24} className={styles.loadingSpinner} />
-                </div>
-              ) : (
-                <>
-                  <ComboboxPrimitive.List className={styles.list}>
-                    {groups.length > 0
-                      ? groups.map((group) =>
-                          group.items.length > 0 ? (
-                            <ComboboxPrimitive.Group
-                              key={group.label}
-                              className={styles.group}
-                            >
-                              <ComboboxPrimitive.GroupLabel
-                                className={styles.groupLabel}
-                              >
-                                {group.label}
-                              </ComboboxPrimitive.GroupLabel>
-                              {group.items.map(renderItemNode)}
-                            </ComboboxPrimitive.Group>
-                          ) : null
-                        )
-                      : items.map(renderItemNode)}
-                  </ComboboxPrimitive.List>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                >
+                  <ComboboxPrimitive.Popup className={styles.popup}>
+                    {!hasItems && (isLoading || !isLoadingComplete) ? (
+                      <div className={styles.loading}>
+                        <LoadingIllustration
+                          size={24}
+                          className={styles.loadingIllustration}
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <ComboboxPrimitive.List className={styles.list}>
+                          {groups.length > 0
+                            ? groups.map((group) =>
+                                group.items.length > 0 ? (
+                                  <ComboboxPrimitive.Group
+                                    key={group.label}
+                                    className={styles.group}
+                                  >
+                                    <ComboboxPrimitive.GroupLabel
+                                      className={styles.groupLabel}
+                                    >
+                                      {group.label}
+                                    </ComboboxPrimitive.GroupLabel>
+                                    {group.items.map(renderItemNode)}
+                                  </ComboboxPrimitive.Group>
+                                ) : null
+                              )
+                            : items.map(renderItemNode)}
+                        </ComboboxPrimitive.List>
 
-                  {!isLoading &&
-                    !hasItems &&
-                    inputValueRef.current.trim() !== "" && (
-                      <ComboboxPrimitive.Empty className={styles.empty}>
-                        {emptyMessage}
-                      </ComboboxPrimitive.Empty>
+                        {isLoadingComplete &&
+                          !hasItems &&
+                          inputValueRef.current.trim() !== "" && (
+                            <ComboboxPrimitive.Empty className={styles.empty}>
+                              {emptyMessage}
+                            </ComboboxPrimitive.Empty>
+                          )}
+                      </>
                     )}
-                </>
+                  </ComboboxPrimitive.Popup>
+                </motion.div>
               )}
-            </ComboboxPrimitive.Popup>
+            </AnimatePresence>
           </ComboboxPrimitive.Positioner>
         </ComboboxPrimitive.Portal>
       </div>

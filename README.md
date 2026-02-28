@@ -75,4 +75,4 @@ In this implementation I have manually typed the Search API's filter options and
 
 ### Semantic token system
 
-I've created a basic variable system of styling values (colours, spacings, typography), but this is difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for...
+I've created a basic variable system of styling values (colours, spacings, typography), but this is difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for easier maintenance (e.g. rolling out branding changes) and enable theming and other opportunties.

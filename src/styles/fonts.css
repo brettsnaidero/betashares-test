@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Rund Display";
+  src: url("/fonts/RundDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rund Text";
+  src: url("/fonts/RundText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rund Text";
+  src: url("/fonts/RundText-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rund Text";
+  src: url("/fonts/RundText-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --font-heading: "Rund Display", sans-serif;
+  --font-text: "Rund Text", sans-serif;
+}

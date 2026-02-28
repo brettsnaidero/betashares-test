@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { LoadingSpinner } from "./LoadingSpinner";
+import { LoadingIllustration } from "./LoadingIllustration";
 
 const meta = {
-  title: "Components/LoadingSpinner",
-  component: LoadingSpinner,
+  title: "Components/Loading/LoadingIllustration",
+  component: LoadingIllustration,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof LoadingSpinner>;
+} satisfies Meta<typeof LoadingIllustration>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

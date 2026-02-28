@@ -9,6 +9,7 @@ import { Combobox } from "@/components/Combobox";
 import { useSuggestions } from "@/hooks/use-suggestions";
 import type { SearchResult } from "@/lib/search-api";
 import styles from "./Header.module.css";
+import { Button } from "../Button";
 
 function Header() {
   const router = useRouter();
@@ -60,6 +61,9 @@ function Header() {
             emptyMessage="No matching results found"
           />
         </div>
+        <div className={styles.placeholder} />
+
+        <Button>Betashares Direct</Button>
       </div>
     </header>
   );
