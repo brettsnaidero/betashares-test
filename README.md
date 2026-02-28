@@ -7,7 +7,7 @@ A Next.js project with TypeScript, CSS Modules, Base UI, Storybook, and Vitest.
 - **Next.js 15** - React framework
 - **TypeScript** - Type safety
 - **CSS Modules** - Scoped styling
-- **Base UI** - Unstyled UI components
+- **Base UI** - UI component primitives
 - **Storybook** - Component development
 - **Vitest** - Unit testing
 - **Testing Library** - Component testing utilities
@@ -54,12 +54,6 @@ Run tests with UI:
 npm run test:ui
 ```
 
-Run tests with coverage:
-
-```bash
-npm run test:coverage
-```
-
 ## Project Structure
 
 ```
@@ -68,6 +62,17 @@ src/
 ├── components/       # React components
 │   └── Button/       # Example component with tests and stories
 ├── styles/           # Global styles
+├── hooks/            # React hooks
+├── lib/              # Libraries (e.g. services)
 └── test/             # Test setup and utilities
 ```
 
+## Things that could be improved next
+
+### Type safety
+
+In this implementation I have manually typed the Search API's filter options and response shape. If the endpoint has some documentation available (e.g. Swagger) we could autogenerate the Typescript types for more specific type safety.
+
+### Semantic token system
+
+I've created a basic variable system of styling values (colours, spacings, typography), but this is difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for...

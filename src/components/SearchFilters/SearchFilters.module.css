@@ -1,0 +1,123 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: rgb(var(--color-tinted-black));
+}
+
+.clearBtn {
+  font-size: var(--font-size-sm);
+  color: rgb(var(--color-orange));
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clearBtn:hover {
+  text-decoration: underline;
+}
+
+/* Section */
+.section {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sectionTitle {
+  display: block;
+  width: 100%;
+  padding: 0;
+}
+
+.sectionToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--spacing-5) 0;
+  gap: var(--spacing-5);
+  background: none;
+  border: none;
+  border-top: 1px solid rgb(var(--color-platinum));
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: rgb(var(--color-almost-black));
+  text-align: left;
+}
+
+.sectionToggle:hover {
+  color: rgb(var(--color-orange));
+}
+
+.chevron {
+  font-size: var(--font-size-lg);
+  line-height: var(--leading-none);
+  color: rgb(var(--color-gray));
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-5);
+}
+
+/* Checkbox */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: rgb(var(--color-almost-black));
+  cursor: pointer;
+  padding: var(--spacing-1) 0;
+}
+
+.checkbox input[type="checkbox"] {
+  accent-color: rgb(var(--color-orange));
+  width: var(--size-2);
+  height: var(--size-2);
+}
+
+/* Range inputs */
+.rangeInputs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.rangeInput {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  border: 1px solid rgb(var(--color-detail));
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: rgb(var(--color-almost-black));
+}
+
+.rangeInput:focus {
+  outline: none;
+  border-color: rgb(var(--color-orange));
+}
+
+.rangeSeparator {
+  font-size: var(--font-size-xs);
+  color: rgb(var(--color-gray));
+  flex-shrink: 0;
+}

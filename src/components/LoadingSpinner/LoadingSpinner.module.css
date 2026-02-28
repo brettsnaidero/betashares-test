@@ -1,0 +1,128 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape {
+  background-color: rgb(var(--color-orange));
+  will-change: clip-path, transform;
+  animation:
+    morph 3.2s ease-in-out infinite,
+    rotate 3.2s ease-in-out infinite;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 12-point polygon morph: circle → square → hexagon → triangle → circle */
+@keyframes morph {
+  0%,
+  100% {
+    /* Circle (12 evenly-spaced points, r=45%, center 50%) */
+    clip-path: polygon(
+      50% 5%,
+      72.5% 11%,
+      89% 27.5%,
+      95% 50%,
+      89% 72.5%,
+      72.5% 89%,
+      50% 95%,
+      27.5% 89%,
+      11% 72.5%,
+      5% 50%,
+      11% 27.5%,
+      27.5% 11%
+    );
+  }
+  25% {
+    /* Square (ray-cast from center to square boundary) */
+    clip-path: polygon(
+      50% 10%,
+      73% 10%,
+      90% 27%,
+      90% 50%,
+      90% 73%,
+      73% 90%,
+      50% 90%,
+      27% 90%,
+      10% 73%,
+      10% 50%,
+      10% 27%,
+      27% 10%
+    );
+  }
+  50% {
+    /* Hexagon (point-top, vertices + edge midpoints) */
+    clip-path: polygon(
+      50% 5%,
+      69.5% 16.25%,
+      89% 27.5%,
+      89% 50%,
+      89% 72.5%,
+      69.5% 83.75%,
+      50% 95%,
+      30.5% 83.75%,
+      11% 72.5%,
+      11% 50%,
+      11% 27.5%,
+      30.5% 16.25%
+    );
+  }
+  75% {
+    /* Triangle (4 points per edge, equilateral pointing up) */
+    clip-path: polygon(
+      50% 5%,
+      59.75% 21.88%,
+      69.5% 38.75%,
+      79.25% 55.63%,
+      89% 72.5%,
+      69.5% 72.5%,
+      50% 72.5%,
+      30.5% 72.5%,
+      11% 72.5%,
+      20.75% 55.63%,
+      30.5% 38.75%,
+      40.25% 21.88%
+    );
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  12.5% {
+    transform: rotate(22.5deg) scale(0.92);
+  }
+  25% {
+    transform: rotate(90deg) scale(1);
+  }
+  37.5% {
+    transform: rotate(135deg) scale(0.92);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  62.5% {
+    transform: rotate(225deg) scale(0.92);
+  }
+  75% {
+    transform: rotate(270deg) scale(1);
+  }
+  87.5% {
+    transform: rotate(315deg) scale(0.92);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

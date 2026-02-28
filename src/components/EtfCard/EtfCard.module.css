@@ -1,0 +1,177 @@
+.card {
+  background: #fff;
+  border: 1px solid rgb(var(--color-platinum));
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  transition: box-shadow 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-2);
+}
+
+/* Header: logo + symbol */
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+}
+
+.logo {
+  width: var(--size-4);
+  height: var(--size-4);
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  background: rgb(var(--color-pale-white));
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.symbol {
+  font-weight: 700;
+  font-size: var(--font-size-xl);
+  letter-spacing: 0.01em;
+  color: rgb(var(--color-tinted-black));
+}
+
+.exchange {
+  font-size: var(--font-size-xs);
+  color: rgb(var(--color-gray));
+}
+
+/* Kind badge */
+.kindBadge {
+  margin-left: auto;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: var(--spacing-1) var(--spacing-4);
+  border-radius: var(--radius-sm);
+}
+
+.etf {
+  background-color: rgba(var(--color-orange), 0.1);
+  color: rgb(var(--color-orange));
+}
+
+.equity {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+/* Name */
+.name {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: rgb(var(--color-almost-black));
+  line-height: var(--leading-tight);
+}
+
+/* Meta tags */
+.meta {
+  display: flex;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-4);
+  border-radius: var(--radius-sm);
+  background-color: rgb(var(--color-pale-white));
+  color: rgb(var(--color-gray));
+}
+
+/* Stats grid */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4) var(--spacing-8);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid rgb(var(--color-platinum));
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.statLabel {
+  font-size: var(--font-size-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgb(var(--color-gray));
+}
+
+.statValue {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: rgb(var(--color-almost-black));
+}
+
+.positive {
+  color: #16a34a;
+}
+
+.negative {
+  color: #dc2626;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: rgb(var(--color-gray));
+  padding-top: var(--spacing-4);
+  border-top: 1px solid rgb(var(--color-platinum));
+}
+
+/* ------------------------------------------------------------------ */
+/*  Skeleton                                                           */
+/* ------------------------------------------------------------------ */
+
+.skeleton {
+  pointer-events: none;
+}
+
+.skeletonText {
+  display: block;
+  height: var(--size-1);
+  width: 60%;
+  border-radius: var(--radius-sm);
+  background-color: rgb(var(--color-platinum));
+}
+
+.skeletonTitle {
+  height: var(--size-2);
+  width: 80%;
+}
+
+.skeletonTag {
+  height: var(--size-3);
+  width: var(--size-6);
+}
+
+.shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: var(--opacity-full);
+  }
+  50% {
+    opacity: var(--opacity-subtle);
+  }
+}

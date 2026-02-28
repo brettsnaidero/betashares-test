@@ -3,13 +3,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6) var(--spacing-12);
   font-family: var(--font-text);
-  font-size: 1rem;
+  font-size: var(--font-size-lg);
   font-weight: 500;
-  line-height: 1;
-  border-radius: 8px;
+  line-height: var(--leading-none);
+  border-radius: var(--radius-full);
   border: none;
   cursor: pointer;
   transition:
@@ -25,7 +25,7 @@
 }
 
 .button:disabled {
-  opacity: 0.5;
+  opacity: var(--opacity-muted);
   cursor: not-allowed;
 }
 
@@ -65,7 +65,7 @@
 .tertiary {
   background-color: transparent;
   color: rgb(var(--color-orange));
-  padding: 0.75rem 1rem;
+  padding: var(--spacing-6) var(--spacing-8);
 }
 
 .tertiary:hover:not(:disabled) {

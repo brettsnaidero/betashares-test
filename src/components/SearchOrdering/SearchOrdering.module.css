@@ -1,0 +1,28 @@
+.ordering {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  color: rgb(var(--color-gray));
+  white-space: nowrap;
+}
+
+.select {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--font-size-md);
+  color: rgb(var(--color-almost-black));
+  background: #fff;
+  border: 1px solid rgb(var(--color-detail));
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.select:focus {
+  outline: none;
+  border-color: rgb(var(--color-orange));
+  box-shadow: 0 0 0 2px rgba(var(--color-orange), 0.15);
+}
