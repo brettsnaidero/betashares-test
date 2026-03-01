@@ -29,8 +29,8 @@ interface ComboboxBaseProps<T> {
   getItemLabel: (item: T) => string;
   /** Extracts a unique value string from an item. */
   getItemValue: (item: T) => string;
-  /** Optional custom renderer for each item. */
-  renderItem?: (item: T) => ReactNode;
+  /** Optional custom renderer for each item. Receives the current input value as the second argument. */
+  renderItem?: (item: T, inputValue: string) => ReactNode;
   /** Called when the user selects an item. */
   onValueChange?: (value: T | null) => void;
   /** Called when the user presses Enter while the input is focused. */
@@ -97,7 +97,14 @@ function Combobox<T>({
   const items = "items" in rest && rest.items ? rest.items : [];
   const groups = "groups" in rest && rest.groups ? rest.groups : [];
   const hasItems = items.length > 0 || groups.some((g) => g.items.length > 0);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const inputValueRef = useRef(defaultInputValue);
+  // When the user submits (Enter) or selects an item, we blur the input to
+  // close the popup. However, Base UI fires onInputValueChange *after* the
+  // blur (e.g. to sync the input text with the selected item's label), which
+  // would normally reopen the popup. This one-shot flag lets us suppress that
+  // single reopening without affecting normal typing / backspace behaviour.
+  const dismissedRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const wasLoadingRef = useRef(false);
@@ -120,6 +127,10 @@ function Combobox<T>({
 
   const handleValueChange = useCallback(
     (value: T | null) => {
+      if (value) {
+        dismissedRef.current = true;
+        inputRef.current?.blur();
+      }
       onValueChange?.(value);
     },
     [onValueChange]
@@ -128,7 +139,11 @@ function Combobox<T>({
   const handleInputValueChange = useCallback(
     (value: string) => {
       inputValueRef.current = value;
-      setIsOpen(showOnEmpty || value.trim() !== "");
+      if (dismissedRef.current) {
+        dismissedRef.current = false;
+      } else {
+        setIsOpen(showOnEmpty || value.trim() !== "");
+      }
       setIsLoadingComplete(false);
       wasLoadingRef.current = false;
       onInputValueChange(value);
@@ -139,7 +154,9 @@ function Combobox<T>({
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" && onSubmit) {
+        dismissedRef.current = true;
         const input = event.currentTarget;
+        input.blur();
         onSubmit(input.value);
       }
     },
@@ -150,7 +167,9 @@ function Combobox<T>({
     const value = getItemValue(item);
     return (
       <ComboboxPrimitive.Item key={value} value={item} className={styles.item}>
-        {renderItem ? renderItem(item) : getItemLabel(item)}
+        {renderItem
+          ? renderItem(item, inputValueRef.current)
+          : getItemLabel(item)}
       </ComboboxPrimitive.Item>
     );
   }
@@ -172,6 +191,7 @@ function Combobox<T>({
             </span>
           )}
           <ComboboxPrimitive.Input
+            ref={inputRef}
             className={cn(styles.input, {
               [styles.inputWithIcon]: !!icon,
               [styles.inputWithSpinner]: isLoading,

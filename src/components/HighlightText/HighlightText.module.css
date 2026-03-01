@@ -1,0 +1,5 @@
+.mark {
+  background: rgb(var(--color-highlight));
+  color: inherit;
+  font-weight: 700;
+}

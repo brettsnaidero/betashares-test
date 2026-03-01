@@ -1,6 +1,7 @@
 export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
 export { Combobox } from "./Combobox";
+export { HighlightText } from "./HighlightText";
 export { ProductCard, ProductCardSkeleton } from "./ProductCard";
 export { Header } from "./Header";
 export { LoadingSpinner } from "./Loading";

@@ -8,6 +8,7 @@ import cn from "classnames";
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { BetasharesLogo } from "@/components/BetasharesLogo";
 import { Combobox } from "@/components/Combobox";
+import { HighlightText } from "@/components/HighlightText";
 import { Drawer } from "@/components/Drawer";
 import { useSuggestions } from "@/hooks/use-suggestions";
 import type { SearchResult } from "@/lib/search-api";
@@ -86,7 +87,7 @@ function Header() {
               icon={<Search className={styles.searchIcon} />}
               getItemLabel={(item) => `${item.symbol} — ${item.display_name}`}
               getItemValue={(item) => item.symbol}
-              renderItem={(item) => (
+              renderItem={(item, query) => (
                 <div className={styles.suggestion}>
                   <span
                     className={cn(
@@ -96,9 +97,11 @@ function Header() {
                         : styles.tickerEquity
                     )}
                   >
-                    {item.symbol}
+                    <HighlightText text={item.symbol} query={query} />
                   </span>
-                  <span className={styles.name}>{item.display_name}</span>
+                  <span className={styles.name}>
+                    <HighlightText text={item.display_name} query={query} />
+                  </span>
                 </div>
               )}
               onValueChange={handleValueChange}
