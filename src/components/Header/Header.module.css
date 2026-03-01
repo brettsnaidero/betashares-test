@@ -52,6 +52,7 @@
 
 /* Search — animated on mobile via motion, always visible on desktop */
 .search {
+  display: none;
   order: 99;
   width: 100%;
   overflow: hidden;
@@ -63,6 +64,7 @@
 
 @media (min-width: 640px) {
   .search {
+    display: block;
     order: initial;
     width: auto;
     flex: 1;
