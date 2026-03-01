@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+  basePath: "/betashares-test",
   reactStrictMode: true,
   images: {
     unoptimized: true,
