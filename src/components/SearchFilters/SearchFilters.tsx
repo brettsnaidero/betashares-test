@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import type { SearchFilters as Filters } from "@/hooks/use-search";
 import styles from "./SearchFilters.module.css";
+import { Checkbox } from "../Checkbox";
+import { FilterSection } from "./FilterSection";
 
 interface SearchFiltersProps {
   filters: Filters;
@@ -34,39 +36,6 @@ const INVESTMENT_SUITABILITIES = [
   "Regular income",
   "Capital growth and regular income",
 ];
-
-interface FilterSectionProps {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}
-
-function FilterSection({
-  title,
-  children,
-  defaultOpen = true,
-}: FilterSectionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
-  return (
-    <fieldset className={styles.section}>
-      <legend className={styles.sectionTitle}>
-        <button
-          type="button"
-          className={styles.sectionToggle}
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-expanded={isOpen}
-        >
-          {title}
-          <span className={styles.chevron} aria-hidden="true">
-            {isOpen ? "−" : "+"}
-          </span>
-        </button>
-      </legend>
-      {isOpen && <div className={styles.sectionContent}>{children}</div>}
-    </fieldset>
-  );
-}
 
 function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
   const toggleArrayFilter = useCallback(
@@ -116,10 +85,9 @@ function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
           { value: "equity", label: "Stocks" },
         ].map(({ value, label }) => (
           <label key={value} className={styles.checkbox}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={filters.kind?.includes(value) ?? false}
-              onChange={() => toggleArrayFilter("kind", value)}
+              onCheckedChange={() => toggleArrayFilter("kind", value)}
             />
             <span>{label}</span>
           </label>
@@ -129,10 +97,9 @@ function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
       <FilterSection title="Asset Category">
         {ASSET_CATEGORIES.map((cat) => (
           <label key={cat} className={styles.checkbox}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={filters.asset_categories?.includes(cat) ?? false}
-              onChange={() => toggleArrayFilter("asset_categories", cat)}
+              onCheckedChange={() => toggleArrayFilter("asset_categories", cat)}
             />
             <span>{cat}</span>
           </label>
@@ -142,10 +109,9 @@ function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
       <FilterSection title="Management Approach">
         {MANAGEMENT_APPROACHES.map((approach) => (
           <label key={approach} className={styles.checkbox}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={filters.management_approach?.includes(approach) ?? false}
-              onChange={() =>
+              onCheckedChange={() =>
                 toggleArrayFilter("management_approach", approach)
               }
             />
@@ -157,10 +123,11 @@ function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
       <FilterSection title="Dividend Frequency">
         {DIVIDEND_FREQUENCIES.map((freq) => (
           <label key={freq} className={styles.checkbox}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={filters.dividend_frequency?.includes(freq) ?? false}
-              onChange={() => toggleArrayFilter("dividend_frequency", freq)}
+              onCheckedChange={() =>
+                toggleArrayFilter("dividend_frequency", freq)
+              }
             />
             <span>{freq}</span>
           </label>
@@ -170,10 +137,11 @@ function SearchFilters({ filters, onFiltersChange }: SearchFiltersProps) {
       <FilterSection title="Investment Suitability">
         {INVESTMENT_SUITABILITIES.map((suit) => (
           <label key={suit} className={styles.checkbox}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={filters.investment_suitability?.includes(suit) ?? false}
-              onChange={() => toggleArrayFilter("investment_suitability", suit)}
+              onCheckedChange={() =>
+                toggleArrayFilter("investment_suitability", suit)
+              }
             />
             <span>{suit}</span>
           </label>

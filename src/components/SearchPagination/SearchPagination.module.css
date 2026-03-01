@@ -21,18 +21,17 @@
   font-weight: 500;
   color: rgb(var(--color-almost-black));
   background: #fff;
-  border: 1px solid rgb(var(--color-detail));
+  border: 1px solid rgb(var(--color-off-white));
   border-radius: var(--radius-md);
   cursor: pointer;
   transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease;
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
   min-width: var(--size-5);
 }
 
 .button:hover:not(:disabled) {
-  background-color: rgba(var(--color-orange), 0.06);
-  border-color: rgb(var(--color-orange));
+  color: rgb(var(--color-orange));
 }
 
 .button:disabled {
@@ -46,12 +45,13 @@
 
 .active {
   background-color: rgb(var(--color-orange));
-  color: #fff;
+  color: rgb(var(--color-white));
   border-color: rgb(var(--color-orange));
 }
 
 .active:hover:not(:disabled) {
   background-color: rgb(var(--color-orange-light));
+  color: rgb(var(--color-white));
 }
 
 .ellipsis {

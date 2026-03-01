@@ -10,13 +10,20 @@
   white-space: nowrap;
 }
 
+.selectWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .select {
-  padding: var(--spacing-4) var(--spacing-6);
+  appearance: none;
+  padding: var(--spacing-4) var(--spacing-12) var(--spacing-4) var(--spacing-6);
   font-size: var(--font-size-md);
   color: rgb(var(--color-almost-black));
-  background: #fff;
-  border: 1px solid rgb(var(--color-detail));
-  border-radius: var(--radius-md);
+  background: rgb(var(--color-pale-white));
+  border: 2px solid rgb(var(--color-pale-white));
+  border-radius: var(--radius-full);
   cursor: pointer;
   min-width: 200px;
 }
@@ -24,5 +31,11 @@
 .select:focus {
   outline: none;
   border-color: rgb(var(--color-orange));
-  box-shadow: 0 0 0 2px rgba(var(--color-orange), 0.15);
+}
+
+.selectIcon {
+  position: absolute;
+  right: var(--spacing-6);
+  color: rgb(var(--color-gray));
+  pointer-events: none;
 }

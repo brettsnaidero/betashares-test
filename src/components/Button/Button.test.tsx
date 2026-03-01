@@ -46,4 +46,22 @@ describe("Button", () => {
     fireEvent.click(screen.getByRole("button"));
     expect(handleClick).not.toHaveBeenCalled();
   });
+
+  it("applies medium size by default", () => {
+    render(<Button>Medium</Button>);
+    const button = screen.getByRole("button");
+    expect(button.className).toContain("medium");
+  });
+
+  it("applies small size when specified", () => {
+    render(<Button size="small">Small</Button>);
+    const button = screen.getByRole("button");
+    expect(button.className).toContain("small");
+  });
+
+  it("applies large size when specified", () => {
+    render(<Button size="large">Large</Button>);
+    const button = screen.getByRole("button");
+    expect(button.className).toContain("large");
+  });
 });

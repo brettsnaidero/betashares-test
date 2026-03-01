@@ -37,11 +37,16 @@ interface UseSearchReturn {
   pageSize: number;
 }
 
-export function useSearch(initialQuery = ""): UseSearchReturn {
+export function useSearch(
+  initialQuery = "",
+  initialPage = 1,
+  initialFilters: SearchFilters = {},
+  initialOrderBy = ""
+): UseSearchReturn {
   const [query, setQuery] = useState(initialQuery);
-  const [filters, setFilters] = useState<SearchFilters>({});
-  const [orderBy, setOrderBy] = useState("");
-  const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState<SearchFilters>(initialFilters);
+  const [orderBy, setOrderBy] = useState(initialOrderBy);
+  const [page, setPage] = useState(initialPage);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,46 +70,15 @@ export function useSearch(initialQuery = ""): UseSearchReturn {
       const params: SearchParams = {
         from: (searchPage - 1) * PAGE_SIZE + 1,
         size: PAGE_SIZE,
+        ...(searchQuery.trim() && { search_text: searchQuery.trim() }),
+        ...(searchOrderBy && { order_by: searchOrderBy }),
       };
 
-      if (searchQuery.trim()) {
-        params.search_text = searchQuery.trim();
-      }
-
-      if (searchOrderBy) {
-        params.order_by = searchOrderBy;
-      }
-
-      // Apply filters
-      if (searchFilters.kind?.length) {
-        params.kind = searchFilters.kind;
-      }
-      if (searchFilters.asset_categories?.length) {
-        params.asset_categories = searchFilters.asset_categories;
-      }
-      if (searchFilters.fund_category?.length) {
-        params.fund_category = searchFilters.fund_category;
-      }
-      if (searchFilters.investment_suitability?.length) {
-        params.investment_suitability = searchFilters.investment_suitability;
-      }
-      if (searchFilters.management_approach?.length) {
-        params.management_approach = searchFilters.management_approach;
-      }
-      if (searchFilters.dividend_frequency?.length) {
-        params.dividend_frequency = searchFilters.dividend_frequency;
-      }
-      if (searchFilters.fund_size) {
-        params.fund_size = searchFilters.fund_size;
-      }
-      if (searchFilters.management_fee) {
-        params.management_fee = searchFilters.management_fee;
-      }
-      if (searchFilters.one_year_return) {
-        params.one_year_return = searchFilters.one_year_return;
-      }
-      if (searchFilters.five_year_return) {
-        params.five_year_return = searchFilters.five_year_return;
+      // Apply non-empty filters
+      for (const [key, value] of Object.entries(searchFilters)) {
+        if (Array.isArray(value) ? value.length : value) {
+          (params as Record<string, unknown>)[key] = value;
+        }
       }
 
       try {
@@ -125,8 +99,13 @@ export function useSearch(initialQuery = ""): UseSearchReturn {
     []
   );
 
-  // Reset page when query or filters change
+  // Reset page when query or filters change (skip initial mount to preserve initialPage)
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     setPage(1);
   }, [debouncedQuery, filters, orderBy]);
 

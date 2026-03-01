@@ -17,6 +17,7 @@
     color 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+  white-space: nowrap;
 }
 
 .button:focus-visible {
@@ -46,33 +47,82 @@
 
 /* Secondary variant - outlined */
 .secondary {
-  background-color: transparent;
+  background-color: rgba(var(--color-white));
   color: rgb(var(--color-orange));
-  border: 2px solid rgb(var(--color-orange));
+  box-shadow: var(--shadow-2);
 }
 
 .secondary:hover:not(:disabled) {
-  background-color: rgba(var(--color-orange), 0.1);
-  border-color: rgb(var(--color-orange-light));
+  background-color: rgba(var(--color-orange) / 0.1);
   color: rgb(var(--color-orange-light));
 }
 
 .secondary:active:not(:disabled) {
-  background-color: rgba(var(--color-orange), 0.15);
+  background-color: rgba(var(--color-orange) / 0.15);
 }
 
 /* Tertiary variant - text only */
 .tertiary {
-  background-color: transparent;
+  background-color: rgba(var(--color-orange) / 0.05);
   color: rgb(var(--color-orange));
   padding: var(--spacing-6) var(--spacing-8);
 }
 
 .tertiary:hover:not(:disabled) {
   color: rgb(var(--color-orange-light));
-  background-color: rgba(var(--color-orange), 0.05);
+  background-color: rgba(var(--color-orange) / 0.1);
 }
 
 .tertiary:active:not(:disabled) {
-  background-color: rgba(var(--color-orange), 0.1);
+  background-color: rgba(var(--color-orange) / 0.15);
+}
+
+/* Size variants */
+.small {
+  padding-block: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-2);
+}
+
+.medium {
+  padding-block: var(--spacing-6);
+  font-size: var(--font-size-lg);
+  gap: var(--spacing-4);
+}
+
+.mediumSmall {
+  padding-block: var(--spacing-5);
+  font-size: var(--font-size-md);
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 1280px) {
+  .mediumSmall {
+    padding-block: var(--spacing-6);
+    font-size: var(--font-size-lg);
+    gap: var(--spacing-4);
+  }
+}
+
+.large {
+  padding-block: var(--spacing-8);
+  font-size: var(--font-size-xl);
+  gap: var(--spacing-6);
+}
+
+/* Padding variants */
+.compact {
+  padding-inline: var(--spacing-6);
+}
+
+.standard {
+  padding-inline: var(--spacing-12);
+}
+
+.spacious {
+  padding-inline: var(--spacing-16);
+}
+
+.none {
+  padding-inline: 0;
 }

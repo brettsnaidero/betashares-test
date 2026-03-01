@@ -1,0 +1,171 @@
+/* Backdrop overlay */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(var(--color-almost-black) / 0.65);
+  transition: opacity var(--transition-medium);
+}
+
+.backdrop[data-starting-style],
+.backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+/* Popup — the sliding panel itself */
+.popup {
+  position: fixed;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(var(--color-white));
+  box-shadow: var(--shadow-3);
+  outline: none;
+  overflow: hidden;
+  transition:
+    translate var(--transition-medium),
+    opacity var(--transition-medium);
+}
+
+/* Anchor to the correct edge based on swipe direction */
+.popup[data-swipe-direction="left"] {
+  top: 0;
+  right: 0;
+  height: 100dvh;
+}
+
+.popup[data-swipe-direction="right"] {
+  top: 0;
+  left: 0;
+  height: 100dvh;
+}
+
+.popup[data-swipe-direction="down"] {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.popup[data-swipe-direction="up"] {
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+/* Size variants for horizontal drawers */
+.small[data-swipe-direction="left"],
+.small[data-swipe-direction="right"] {
+  width: 320px;
+}
+
+.medium[data-swipe-direction="left"],
+.medium[data-swipe-direction="right"] {
+  width: 420px;
+}
+
+.large[data-swipe-direction="left"],
+.large[data-swipe-direction="right"] {
+  width: 560px;
+}
+
+/* Size variants for vertical drawers */
+.small[data-swipe-direction="down"],
+.small[data-swipe-direction="up"] {
+  max-height: 30dvh;
+}
+
+.medium[data-swipe-direction="down"],
+.medium[data-swipe-direction="up"] {
+  max-height: 50dvh;
+}
+
+.large[data-swipe-direction="down"],
+.large[data-swipe-direction="up"] {
+  max-height: 80dvh;
+}
+
+/* Enter / exit animations */
+.popup[data-swipe-direction="left"][data-starting-style],
+.popup[data-swipe-direction="left"][data-ending-style] {
+  translate: 100% 0;
+}
+
+.popup[data-swipe-direction="right"][data-starting-style],
+.popup[data-swipe-direction="right"][data-ending-style] {
+  translate: -100% 0;
+}
+
+.popup[data-swipe-direction="down"][data-starting-style],
+.popup[data-swipe-direction="down"][data-ending-style] {
+  translate: 0 100%;
+}
+
+.popup[data-swipe-direction="up"][data-starting-style],
+.popup[data-swipe-direction="up"][data-ending-style] {
+  translate: 0 -100%;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-12);
+}
+
+/* Header row */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-bottom: 1px solid rgb(var(--color-platinum));
+}
+
+/* Title */
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: rgb(var(--color-almost-black));
+  margin: 0;
+}
+
+/* Description */
+.description {
+  font-family: var(--font-text);
+  font-size: var(--font-size-base);
+  line-height: var(--leading-normal);
+  color: rgb(var(--color-gray));
+  margin: 0;
+  padding: var(--spacing-6) var(--spacing-12) 0;
+}
+
+/* Close button */
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-4);
+  height: var(--size-4);
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: rgb(var(--color-gray));
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.close:hover {
+  background-color: rgba(var(--color-off-white));
+  color: rgb(var(--color-almost-black));
+}
+
+.close:focus-visible {
+  outline: 2px solid rgb(var(--color-orange));
+  outline-offset: 2px;
+}

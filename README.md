@@ -8,9 +8,29 @@ A Next.js project with TypeScript, CSS Modules, Base UI, Storybook, and Vitest.
 - **TypeScript** - Type safety
 - **CSS Modules** - Scoped styling
 - **Base UI** - UI component primitives
-- **Storybook** - Component development
+- **Storybook** - Component UI demos
 - **Vitest** - Unit testing
 - **Testing Library** - Component testing utilities
+
+## Key features/improvements
+
+### Search bar accessibility
+
+I have developed the search bar to use a [combobox UI pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), leveraging the `Combobox` primitive from [Base UI](https://base-ui.com/) to simplify the implementation and handle basic keyboard navigation management and other accessibility concerns.
+
+### Animation
+
+Subtle animations have been implemented to enhance the usability and general sense of quality of the experience, with feedback states for loading and transition states that clearly communicate what is occuring to the user.
+
+## Things that could be improved next
+
+### Type safety
+
+In this implementation I have manually typed the Search API's filter options and response shape. If the endpoint has some documentation available (e.g. Swagger) we could autogenerate the Typescript types for more specific type safety.
+
+### Semantic token system
+
+I've created a basic variable system of styling values (colours, spacings, typography), but this would be difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for easier maintenance (e.g. rolling out branding changes) and enable theming and other opportunties.
 
 ## Getting Started
 
@@ -66,13 +86,3 @@ src/
 ├── lib/              # Libraries (e.g. services)
 └── test/             # Test setup and utilities
 ```
-
-## Things that could be improved next
-
-### Type safety
-
-In this implementation I have manually typed the Search API's filter options and response shape. If the endpoint has some documentation available (e.g. Swagger) we could autogenerate the Typescript types for more specific type safety.
-
-### Semantic token system
-
-I've created a basic variable system of styling values (colours, spacings, typography), but this is difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for easier maintenance (e.g. rolling out branding changes) and enable theming and other opportunties.

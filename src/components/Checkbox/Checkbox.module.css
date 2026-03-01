@@ -1,0 +1,88 @@
+/* Checkbox root — the clickable box */
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1.5px solid rgb(var(--color-detail));
+  border-radius: var(--radius-sm);
+  background-color: rgb(var(--color-white));
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.root:hover {
+  border-color: rgb(var(--color-dark-gray));
+}
+
+.root:focus-visible {
+  outline: 2px solid rgb(var(--color-orange));
+  outline-offset: 2px;
+}
+
+/* Checked state */
+.root[data-checked] {
+  background-color: rgb(var(--color-orange));
+  border-color: rgb(var(--color-orange));
+}
+
+.root[data-checked]:hover {
+  background-color: rgb(var(--color-orange-light));
+  border-color: rgb(var(--color-orange-light));
+}
+
+/* Indeterminate state */
+.root[data-indeterminate] {
+  background-color: rgb(var(--color-orange));
+  border-color: rgb(var(--color-orange));
+}
+
+.root[data-indeterminate]:hover {
+  background-color: rgb(var(--color-orange-light));
+  border-color: rgb(var(--color-orange-light));
+}
+
+/* Disabled state */
+.root[data-disabled] {
+  opacity: var(--opacity-muted);
+  cursor: not-allowed;
+}
+
+.root[data-disabled]:hover {
+  border-color: rgb(var(--color-detail));
+}
+
+.root[data-disabled][data-checked]:hover {
+  background-color: rgb(var(--color-orange));
+  border-color: rgb(var(--color-orange));
+}
+
+/* Indicator — the check/dash icon */
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(var(--color-white));
+}
+
+/* Label wrapper */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-family: var(--font-text);
+  font-size: var(--font-size-md);
+  line-height: var(--leading-normal);
+  color: rgb(var(--color-tinted-black));
+  cursor: pointer;
+  user-select: none;
+}
+
+.label.disabled {
+  opacity: var(--opacity-muted);
+  cursor: not-allowed;
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import styles from "./SearchOrdering.module.css";
 
 interface SearchOrderingProps {
@@ -25,18 +26,21 @@ function SearchOrdering({ orderBy, onOrderByChange }: SearchOrderingProps) {
       <label htmlFor="sort-select" className={styles.label}>
         Sort by
       </label>
-      <select
-        id="sort-select"
-        className={styles.select}
-        value={orderBy}
-        onChange={(e) => onOrderByChange(e.target.value)}
-      >
-        {ORDER_OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+      <div className={styles.selectWrapper}>
+        <select
+          id="sort-select"
+          className={styles.select}
+          value={orderBy}
+          onChange={(e) => onOrderByChange(e.target.value)}
+        >
+          {ORDER_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className={styles.selectIcon} size={16} />
+      </div>
     </div>
   );
 }

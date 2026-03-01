@@ -17,13 +17,13 @@ export default function Home() {
         <div className={styles.actions}>
           <Button
             variant="primary"
-            // render={() => <a href="https://www.betashares.com.au/direct" />}
+            render={<a href="https://www.betashares.com.au/direct" />}
           >
             Explore Betashares Direct
           </Button>
           <Button
             variant="secondary"
-            // render={() => <a href="https://www.betashares.com.au/fund" />}
+            render={<a href="https://www.betashares.com.au/fund" />}
           >
             View all funds
           </Button>

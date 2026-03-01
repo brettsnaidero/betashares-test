@@ -23,8 +23,8 @@ function groupByKind(results: SearchResult[]): ComboboxGroup<SearchResult>[] {
   return groups;
 }
 
-export function useSuggestions(): UseSuggestionsReturn {
-  const [inputValue, setInputValue] = useState("");
+export function useSuggestions(initialValue = ""): UseSuggestionsReturn {
+  const [inputValue, setInputValue] = useState(initialValue);
   const [groups, setGroups] = useState<ComboboxGroup<SearchResult>[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);

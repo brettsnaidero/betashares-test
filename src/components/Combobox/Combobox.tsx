@@ -37,6 +37,8 @@ interface ComboboxBaseProps<T> {
   onSubmit?: (inputValue: string) => void;
   /** Whether suggestions are currently loading. */
   isLoading?: boolean;
+  /** Default value for the input field. */
+  defaultInputValue?: string;
   /** Placeholder text for the input. */
   placeholder?: string;
   /** Message shown when no items match. */
@@ -75,6 +77,7 @@ function Combobox<T>({
   onValueChange,
   onSubmit,
   isLoading = false,
+  defaultInputValue = "",
   placeholder = "Search…",
   emptyMessage = "No results found",
   icon,
@@ -85,7 +88,7 @@ function Combobox<T>({
   const items = "items" in rest && rest.items ? rest.items : [];
   const groups = "groups" in rest && rest.groups ? rest.groups : [];
   const hasItems = items.length > 0 || groups.some((g) => g.items.length > 0);
-  const inputValueRef = useRef("");
+  const inputValueRef = useRef(defaultInputValue);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const wasLoadingRef = useRef(false);
@@ -143,6 +146,7 @@ function Combobox<T>({
   return (
     <ComboboxPrimitive.Root
       value={null}
+      defaultInputValue={defaultInputValue}
       onValueChange={handleValueChange}
       onInputValueChange={handleInputValueChange}
       open={isOpen}
@@ -164,8 +168,9 @@ function Combobox<T>({
             aria-label={ariaLabel}
             onKeyDown={handleKeyDown}
           />
+          {/* Small loading indicator for updates */}
           <AnimatePresence>
-            {hasItems && (isLoading || !isLoadingComplete) ? (
+            {isOpen && hasItems && (isLoading || !isLoadingComplete) ? (
               <motion.span
                 className={styles.inlineSpinner}
                 initial={{ opacity: 0 }}
@@ -186,6 +191,7 @@ function Combobox<T>({
             sideOffset={4}
           >
             <AnimatePresence>
+              {/* Loading indicator for initial load */}
               {isOpen && (
                 <motion.div
                   initial={{ opacity: 0, y: -4 }}

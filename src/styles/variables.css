@@ -12,7 +12,11 @@
   --color-darkest-gray: 41 41 41;
   --color-salmon: 253 166 138;
   --color-platinum: 237 225 223;
+
+  /* Additional colors */
   --color-white: 255 255 255;
+  --color-positive: 22 163 74;
+  --color-negative: 220 38 38;
 
   /* Font sizes */
   --font-size-2xs: 11px;
@@ -75,7 +79,6 @@
   /* Layout widths */
   --width-container: 1280px;
   --width-text: 600px;
-  --width-search: 480px;
   --width-card-min: 300px;
   --width-sidebar: 260px;
 
@@ -86,5 +89,11 @@
 
   /* Other */
   --gutter: var(--spacing-14);
-  --header-height: 76.5px;
+  --header-height: 80px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-height: 96px;
+  }
 }

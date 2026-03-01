@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary"],
+      options: ["primary", "secondary", "tertiary"],
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
     },
     disabled: {
       control: "boolean",
@@ -53,5 +57,26 @@ export const DisabledSecondary: Story = {
     children: "Disabled Secondary",
     variant: "secondary",
     disabled: true,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    children: "Small Button",
+    size: "small",
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    children: "Medium Button",
+    size: "medium",
+  },
+};
+
+export const Large: Story = {
+  args: {
+    children: "Large Button",
+    size: "large",
   },
 };

@@ -58,6 +58,7 @@
   font-weight: 600;
   color: rgb(var(--color-almost-black));
   text-align: left;
+  transition: color var(--transition-fast);
 }
 
 .sectionToggle:hover {

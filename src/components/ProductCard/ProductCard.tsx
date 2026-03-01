@@ -1,7 +1,7 @@
 import Image from "next/image";
 import cn from "classnames";
 import type { SearchResult } from "@/lib/search-api";
-import styles from "./EtfCard.module.css";
+import styles from "./ProductCard.module.css";
 
 interface ProductCardProps {
   product: SearchResult;
@@ -40,14 +40,18 @@ function ProductCard({ product }: ProductCardProps) {
   return (
     <article className={styles.card}>
       <div className={styles.header}>
-        <Image
-          src={product.logo}
-          alt=""
-          className={styles.logo}
-          width={32}
-          height={32}
-          unoptimized
-        />
+        {product.logo ? (
+          <Image
+            src={product.logo}
+            alt=""
+            className={styles.logo}
+            width={32}
+            height={32}
+            unoptimized
+          />
+        ) : (
+          <div className={styles.logo} />
+        )}
         <div className={styles.identity}>
           <span className={styles.symbol}>{product.symbol}</span>
           <span className={styles.exchange}>{product.exchange}</span>
@@ -132,53 +136,5 @@ function ProductCard({ product }: ProductCardProps) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Skeleton variant for loading state                                 */
-/* ------------------------------------------------------------------ */
-
-function ProductCardSkeleton() {
-  return (
-    <article className={cn(styles.card, styles.skeleton)}>
-      <div className={styles.header}>
-        <div className={cn(styles.logo, styles.shimmer)} />
-        <div className={styles.identity}>
-          <span className={cn(styles.skeletonText, styles.shimmer)} />
-        </div>
-      </div>
-      <div
-        className={cn(
-          styles.skeletonText,
-          styles.skeletonTitle,
-          styles.shimmer
-        )}
-      />
-      <div className={styles.meta}>
-        <span
-          className={cn(
-            styles.skeletonText,
-            styles.skeletonTag,
-            styles.shimmer
-          )}
-        />
-        <span
-          className={cn(
-            styles.skeletonText,
-            styles.skeletonTag,
-            styles.shimmer
-          )}
-        />
-      </div>
-      <div className={styles.stats}>
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div className={styles.stat} key={i}>
-            <span className={cn(styles.skeletonText, styles.shimmer)} />
-            <span className={cn(styles.skeletonText, styles.shimmer)} />
-          </div>
-        ))}
-      </div>
-    </article>
-  );
-}
-
-export { ProductCard, ProductCardSkeleton };
+export { ProductCard };
 export type { ProductCardProps };
