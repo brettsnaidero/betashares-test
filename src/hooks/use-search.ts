@@ -68,7 +68,7 @@ export function useSearch(
       setIsLoading(true);
 
       const params: SearchParams = {
-        from: (searchPage - 1) * PAGE_SIZE + 1,
+        from: searchPage,
         size: PAGE_SIZE,
         ...(searchQuery.trim() && { search_text: searchQuery.trim() }),
         ...(searchOrderBy && { order_by: searchOrderBy }),

@@ -62,7 +62,7 @@ function Header() {
           aria-label={searchOpen ? "Close search" : "Open search"}
           onClick={() => setSearchOpen((prev) => !prev)}
         >
-          <Search size={20} />
+          <Search className={styles.searchIcon} size={20} />
         </button>
 
         <motion.div
@@ -130,7 +130,7 @@ function Header() {
           onOpenChange={setMobileMenuOpen}
         >
           <Drawer.Trigger className={styles.menuButton} aria-label="Open menu">
-            <Menu size={24} />
+            <Menu className={styles.menuIcon} size={20} />
           </Drawer.Trigger>
           <Drawer.Portal>
             <Drawer.Backdrop />

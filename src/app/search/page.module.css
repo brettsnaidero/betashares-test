@@ -112,6 +112,10 @@
 
 /* Empty state */
 .empty {
+  background-color: rgb(var(--color-white));
+  border: 1px solid rgb(var(--color-platinum));
+  box-shadow: var(--shadow-1);
+  border-radius: var(--radius-xl);
   text-align: center;
   padding: var(--spacing-32) var(--spacing-16);
 }

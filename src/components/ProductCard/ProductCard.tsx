@@ -125,13 +125,14 @@ function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      {isEtf &&
+      {/* ETF-specific footer with dividend frequency and investment suitability */}
+      {/* isEtf &&
         (product.dividend_frequency || product.investment_suitability) && (
           <div className={styles.footer}>
             <span>{product.dividend_frequency ?? ""}</span>
             <span>{product.investment_suitability ?? ""}</span>
           </div>
-        )}
+        ) */}
     </article>
   );
 }

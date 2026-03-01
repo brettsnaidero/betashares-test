@@ -4,7 +4,7 @@
   z-index: 50;
   background-color: rgb(var(--color-pale-white));
 
-  --width-search: 100%;
+  --width-search: 380px;
 }
 
 .inner {
@@ -112,6 +112,13 @@
 .searchIcon {
   width: var(--size-3);
   height: var(--size-3);
+}
+
+@media (min-width: 640px) {
+  .searchToggle {
+    width: var(--size-4);
+    height: var(--size-4);
+  }
 }
 
 /* Suggestion item layout */
@@ -272,6 +279,18 @@
 @media (min-width: 1024px) {
   .menuButton {
     display: none;
+  }
+}
+
+.menuIcon {
+  width: var(--size-3);
+  height: var(--size-3);
+}
+
+@media (min-width: 640px) {
+  .menuIcon {
+    width: var(--size-4);
+    height: var(--size-4);
   }
 }
 

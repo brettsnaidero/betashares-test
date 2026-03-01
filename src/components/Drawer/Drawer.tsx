@@ -103,10 +103,7 @@ type DrawerTitleProps = DrawerPrimitive.Title.Props;
 
 function DrawerTitle({ className, ...props }: DrawerTitleProps) {
   return (
-    <DrawerPrimitive.Title
-      className={cn(styles.title, className)}
-      {...props}
-    />
+    <DrawerPrimitive.Title className={cn(styles.title, className)} {...props} />
   );
 }
 
@@ -114,10 +111,7 @@ function DrawerTitle({ className, ...props }: DrawerTitleProps) {
 
 type DrawerDescriptionProps = DrawerPrimitive.Description.Props;
 
-function DrawerDescription({
-  className,
-  ...props
-}: DrawerDescriptionProps) {
+function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
   return (
     <DrawerPrimitive.Description
       className={cn(styles.description, className)}
@@ -132,11 +126,8 @@ type DrawerCloseProps = DrawerPrimitive.Close.Props;
 
 function DrawerClose({ className, children, ...props }: DrawerCloseProps) {
   return (
-    <DrawerPrimitive.Close
-      className={cn(styles.close, className)}
-      {...props}
-    >
-      {children ?? <X size={18} />}
+    <DrawerPrimitive.Close className={cn(styles.close, className)} {...props}>
+      {children ?? <X className={styles.closeIcon} size={20} />}
     </DrawerPrimitive.Close>
   );
 }

@@ -125,8 +125,7 @@
 
 /* Title */
 .title {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: 600;
   line-height: var(--leading-tight);
   color: rgb(var(--color-almost-black));
@@ -148,8 +147,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--size-4);
-  height: var(--size-4);
+  width: var(--size-5);
+  height: var(--size-5);
   border-radius: var(--radius-full);
   border: none;
   background: transparent;
@@ -168,4 +167,9 @@
 .close:focus-visible {
   outline: 2px solid rgb(var(--color-orange));
   outline-offset: 2px;
+}
+
+.closeIcon {
+  width: var(--size-3);
+  height: var(--size-3);
 }

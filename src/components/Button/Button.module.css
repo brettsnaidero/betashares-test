@@ -79,33 +79,32 @@
 
 /* Size variants */
 .small {
-  padding-block: var(--spacing-4);
+  height: var(--size-5);
   font-size: var(--font-size-sm);
   gap: var(--spacing-2);
 }
 
 .medium {
-  padding-block: var(--spacing-6);
+  height: var(--size-6);
   font-size: var(--font-size-lg);
   gap: var(--spacing-4);
 }
 
 .mediumSmall {
-  padding-block: var(--spacing-5);
+  height: var(--size-6);
   font-size: var(--font-size-md);
   gap: var(--spacing-3);
 }
 
 @media (min-width: 1280px) {
   .mediumSmall {
-    padding-block: var(--spacing-6);
     font-size: var(--font-size-lg);
     gap: var(--spacing-4);
   }
 }
 
 .large {
-  padding-block: var(--spacing-8);
+  height: var(--size-7);
   font-size: var(--font-size-xl);
   gap: var(--spacing-6);
 }

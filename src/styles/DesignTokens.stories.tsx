@@ -246,8 +246,8 @@ export const Sizes: StoryFn = () => (
         { name: "--size-1", value: "14px" },
         { name: "--size-2", value: "16px" },
         { name: "--size-3", value: "20px" },
-        { name: "--size-4", value: "32px" },
-        { name: "--size-5", value: "36px" },
+        { name: "--size-4", value: "24px" },
+        { name: "--size-5", value: "32px" },
         { name: "--size-6", value: "48px" },
       ].map(({ name, value }) => (
         <div

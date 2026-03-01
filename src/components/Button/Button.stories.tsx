@@ -16,7 +16,11 @@ const meta = {
     },
     size: {
       control: "select",
-      options: ["small", "medium", "large"],
+      options: ["small", "medium", "mediumSmall", "large"],
+    },
+    padding: {
+      control: "select",
+      options: ["compact", "standard", "spacious", "none"],
     },
     disabled: {
       control: "boolean",
@@ -30,6 +34,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/* Variants */
 export const Primary: Story = {
   args: {
     children: "Primary Button",
@@ -41,6 +46,13 @@ export const Secondary: Story = {
   args: {
     children: "Secondary Button",
     variant: "secondary",
+  },
+};
+
+export const Tertiary: Story = {
+  args: {
+    children: "Tertiary Button",
+    variant: "tertiary",
   },
 };
 
@@ -60,6 +72,7 @@ export const DisabledSecondary: Story = {
   },
 };
 
+/* Sizes */
 export const Small: Story = {
   args: {
     children: "Small Button",
@@ -74,9 +87,46 @@ export const Medium: Story = {
   },
 };
 
+export const MediumSmall: Story = {
+  args: {
+    children: "Medium Button",
+    size: "medium",
+  },
+};
+
 export const Large: Story = {
   args: {
     children: "Large Button",
     size: "large",
+  },
+};
+
+/* Padding */
+export const CompactPadding: Story = {
+  args: {
+    children: "Compact Padding",
+    padding: "compact",
+  },
+};
+
+export const StandardPadding: Story = {
+  args: {
+    children: "Standard Padding",
+    padding: "standard",
+  },
+};
+
+export const SpaciousPadding: Story = {
+  args: {
+    children: "Spacious Padding",
+    padding: "spacious",
+  },
+};
+
+export const NoPadding: Story = {
+  args: {
+    variant: "tertiary",
+    children: "No Padding",
+    padding: "none",
   },
 };
