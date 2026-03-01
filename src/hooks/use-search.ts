@@ -34,6 +34,7 @@ interface UseSearchReturn {
   setOrderBy: (orderBy: string) => void;
   page: number;
   setPage: (page: number) => void;
+  error: boolean;
   pageSize: number;
 }
 
@@ -50,6 +51,7 @@ export function useSearch(
   const [results, setResults] = useState<SearchResult[]>([]);
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
   const debouncedQuery = useDebounce(query, DEBOUNCE_MS);
@@ -66,6 +68,7 @@ export function useSearch(
       const controller = new AbortController();
       abortRef.current = controller;
       setIsLoading(true);
+      setError(false);
 
       const params: SearchParams = {
         from: searchPage,
@@ -86,8 +89,13 @@ export function useSearch(
         setResults(response.results);
         setCount(response.count);
       } catch (error) {
-        if (error instanceof DOMException && error.name === "AbortError")
+        if (error instanceof DOMException && error.name === "AbortError") {
+          // Ignore abort errors
           return;
+        }
+
+        setError(true);
+
         setResults([]);
         setCount(0);
       } finally {
@@ -130,6 +138,7 @@ export function useSearch(
     setOrderBy,
     page,
     setPage,
+    error,
     pageSize: PAGE_SIZE,
   };
 }

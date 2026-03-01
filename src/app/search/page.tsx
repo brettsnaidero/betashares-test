@@ -39,6 +39,7 @@ function SearchContent() {
     setOrderBy,
     page,
     setPage,
+    error,
     pageSize,
   } = useSearch(initialQuery, initialPage, initialFilters, initialOrderBy);
 
@@ -185,6 +186,20 @@ function SearchContent() {
                 {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
                   <ProductCardSkeleton key={i} />
                 ))}
+              </motion.div>
+            ) : error ? (
+              <motion.div
+                key="error"
+                className={styles.empty}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1, ease: "easeOut" }}
+              >
+                <h2 className={styles.emptyTitle}>An error occurred</h2>
+                <p className={styles.emptyText}>
+                  There was a problem fetching the search results.
+                </p>
               </motion.div>
             ) : results.length > 0 ? (
               <motion.div

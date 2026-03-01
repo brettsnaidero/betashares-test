@@ -143,8 +143,6 @@
   flex-shrink: 0;
   font-weight: 600;
   font-size: var(--font-size-sm);
-  color: rgb(var(--color-orange));
-  background-color: rgba(var(--color-pale-white));
   border-radius: var(--radius-sm);
   letter-spacing: 0.02em;
   width: var(--size-6);
@@ -152,6 +150,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tickerEtf {
+  color: rgb(var(--color-orange));
+  background-color: rgba(var(--color-orange) / 0.1);
+}
+
+.tickerEquity {
+  color: #3b82f6;
+  background-color: rgba(59 130 246 / 0.1);
 }
 
 .name {

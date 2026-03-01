@@ -83,3 +83,59 @@ export const Empty: StoryFn = () => (
     />
   </div>
 );
+
+const popularFruits: Fruit[] = [
+  { id: "1", name: "Apple", emoji: "🍎" },
+  { id: "3", name: "Cherry", emoji: "🍒" },
+  { id: "7", name: "Grape", emoji: "🍇" },
+];
+
+export const SuggestionsOnFocus: StoryFn = () => {
+  const [items, setItems] = useState(popularFruits);
+
+  return (
+    <div style={{ width: 400 }}>
+      <Combobox<Fruit>
+        items={items}
+        showOnEmpty
+        onInputValueChange={(value) => {
+          if (value.trim() === "") {
+            setItems(popularFruits);
+          } else {
+            setItems(
+              allFruits.filter((f) =>
+                f.name.toLowerCase().includes(value.toLowerCase())
+              )
+            );
+          }
+        }}
+        getItemLabel={(item) => item.name}
+        getItemValue={(item) => item.id}
+        renderItem={(item) => (
+          <span>
+            {item.emoji} {item.name}
+          </span>
+        )}
+        onValueChange={(item) => console.log("Selected:", item)}
+        placeholder="Focus to see suggestions…"
+        aria-label="Search with suggestions"
+        emptyMessage="No matching fruits"
+      />
+    </div>
+  );
+};
+
+export const Error: StoryFn = () => (
+  <div style={{ width: 400 }}>
+    <Combobox
+      items={[]}
+      onInputValueChange={() => {}}
+      getItemLabel={() => ""}
+      getItemValue={() => ""}
+      placeholder="Error example…"
+      aria-label="Error example"
+      isError
+      errorMessage="Unable to load results — please try again"
+    />
+  </div>
+);

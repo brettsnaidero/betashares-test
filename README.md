@@ -22,6 +22,14 @@ I have developed the search bar to use a [combobox UI pattern](https://www.w3.or
 
 Subtle animations have been implemented to enhance the usability and general sense of quality of the experience, with feedback states for loading and transition states that clearly communicate what is occuring to the user.
 
+### Search page
+
+The search page uses query parameters to persist the search state, namely:
+
+- The search query
+- Pagination
+- Filters
+
 ## Things that could be improved next
 
 ### Type safety
@@ -31,6 +39,10 @@ In this implementation I have manually typed the Search API's filter options and
 ### Semantic token system
 
 I've created a basic variable system of styling values (colours, spacings, typography), but this would be difficult to scale and adapt. A mapping of the basic brand attributes to a semantic system of tokens would allow for easier maintenance (e.g. rolling out branding changes) and enable theming and other opportunties.
+
+### Testing
+
+To avoid regressions in the functionality of the app, it would be ideal to have end-to-end test coverage of key flows, such as using the search page filters and pagination controls.
 
 ## Getting Started
 

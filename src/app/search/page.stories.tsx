@@ -9,7 +9,7 @@ const baseResult: SearchResult = {
   symbol: "A200",
   display_name: "BetaShares Australia 200 ETF",
   kind: "etf",
-  logo: "https://betashares.com.au/logo/a200.png",
+  logo: undefined, // "https://betashares.com.au/logo/a200.png",
   inception_date: "2018-05-10",
   currency: "AUD",
   domicile: "Australia",

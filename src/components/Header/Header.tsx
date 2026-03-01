@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
+import cn from "classnames";
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { BetasharesLogo } from "@/components/BetasharesLogo";
 import { Combobox } from "@/components/Combobox";
@@ -79,6 +80,7 @@ function Header() {
           <div className={styles.searchInner}>
             <Combobox<SearchResult>
               groups={groups}
+              showOnEmpty
               defaultInputValue={defaultQuery}
               onInputValueChange={setInputValue}
               icon={<Search className={styles.searchIcon} />}
@@ -86,7 +88,16 @@ function Header() {
               getItemValue={(item) => item.symbol}
               renderItem={(item) => (
                 <div className={styles.suggestion}>
-                  <span className={styles.ticker}>{item.symbol}</span>
+                  <span
+                    className={cn(
+                      styles.ticker,
+                      item.kind === "etf"
+                        ? styles.tickerEtf
+                        : styles.tickerEquity
+                    )}
+                  >
+                    {item.symbol}
+                  </span>
                   <span className={styles.name}>{item.display_name}</span>
                 </div>
               )}

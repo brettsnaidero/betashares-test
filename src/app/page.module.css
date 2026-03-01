@@ -36,6 +36,14 @@
 
 .actions {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: var(--spacing-8);
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

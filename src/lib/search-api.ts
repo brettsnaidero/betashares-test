@@ -40,7 +40,7 @@ export interface SearchResult {
   symbol: string;
   display_name: string;
   kind: SearchResultKind;
-  logo: string;
+  logo?: string;
   inception_date: string;
   currency: string;
   domicile: string;

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { searchProducts, type SearchResult } from "@/lib/search-api";
+import { getPopularSearches } from "@/lib/popular-searches";
 import type { ComboboxGroup } from "@/components/Combobox";
 import { useDebounce } from "./use-debounce";
 
@@ -26,10 +27,24 @@ function groupByKind(results: SearchResult[]): ComboboxGroup<SearchResult>[] {
 export function useSuggestions(initialValue = ""): UseSuggestionsReturn {
   const [inputValue, setInputValue] = useState(initialValue);
   const [groups, setGroups] = useState<ComboboxGroup<SearchResult>[]>([]);
+  const [popularGroups, setPopularGroups] = useState<ComboboxGroup<SearchResult>[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
   const debouncedQuery = useDebounce(inputValue, DEBOUNCE_MS);
+
+  // Load popular searches once on mount
+  useEffect(() => {
+    let cancelled = false;
+    getPopularSearches().then((results) => {
+      if (!cancelled) {
+        setPopularGroups([{ label: "Popular", items: results }]);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const fetchSuggestions = useCallback(async (query: string) => {
     abortRef.current?.abort();
@@ -68,5 +83,7 @@ export function useSuggestions(initialValue = ""): UseSuggestionsReturn {
     return () => abortRef.current?.abort();
   }, []);
 
-  return { groups, isLoading, inputValue, setInputValue };
+  const activeGroups = inputValue.trim() === "" ? popularGroups : groups;
+
+  return { groups: activeGroups, isLoading, inputValue, setInputValue };
 }

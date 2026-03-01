@@ -43,6 +43,12 @@ interface ComboboxBaseProps<T> {
   placeholder?: string;
   /** Message shown when no items match. */
   emptyMessage?: string;
+  /** Whether an error occurred (e.g. failed fetch). */
+  isError?: boolean;
+  /** Message shown when isError is true. */
+  errorMessage?: string;
+  /** When true, the popup can open even if the input is empty (e.g. for popular suggestions). */
+  showOnEmpty?: boolean;
   /** Icon rendered on the left side of the input. */
   icon?: ReactNode;
   /** Additional class name for the root wrapper. */
@@ -80,6 +86,9 @@ function Combobox<T>({
   defaultInputValue = "",
   placeholder = "Search…",
   emptyMessage = "No results found",
+  isError = false,
+  errorMessage = "Something went wrong",
+  showOnEmpty = false,
   icon,
   className,
   "aria-label": ariaLabel,
@@ -102,9 +111,12 @@ function Combobox<T>({
     }
   }, [isLoading]);
 
-  const handleOpenChange = useCallback((open: boolean) => {
-    setIsOpen(open && inputValueRef.current.trim() !== "");
-  }, []);
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      setIsOpen(open && (showOnEmpty || inputValueRef.current.trim() !== ""));
+    },
+    [showOnEmpty]
+  );
 
   const handleValueChange = useCallback(
     (value: T | null) => {
@@ -116,12 +128,12 @@ function Combobox<T>({
   const handleInputValueChange = useCallback(
     (value: string) => {
       inputValueRef.current = value;
-      setIsOpen(value.trim() !== "");
+      setIsOpen(showOnEmpty || value.trim() !== "");
       setIsLoadingComplete(false);
       wasLoadingRef.current = false;
       onInputValueChange(value);
     },
-    [onInputValueChange]
+    [onInputValueChange, showOnEmpty]
   );
 
   const handleKeyDown = useCallback(
@@ -170,7 +182,10 @@ function Combobox<T>({
           />
           {/* Small loading indicator for updates */}
           <AnimatePresence>
-            {isOpen && hasItems && (isLoading || !isLoadingComplete) ? (
+            {isOpen &&
+            hasItems &&
+            inputValueRef.current.trim() !== "" &&
+            (isLoading || !isLoadingComplete) ? (
               <motion.span
                 className={styles.inlineSpinner}
                 initial={{ opacity: 0 }}
@@ -201,7 +216,19 @@ function Combobox<T>({
                 >
                   <ComboboxPrimitive.Popup className={styles.popup}>
                     <AnimatePresence mode="wait">
-                      {!hasItems && (isLoading || !isLoadingComplete) ? (
+                      {isError ? (
+                        <motion.div
+                          key="error"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div role="alert" className={styles.error}>
+                            {errorMessage}
+                          </div>
+                        </motion.div>
+                      ) : !hasItems && (isLoading || !isLoadingComplete) ? (
                         <motion.div
                           key="loading"
                           initial={{ opacity: 0 }}
@@ -222,25 +249,27 @@ function Combobox<T>({
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <ComboboxPrimitive.List className={styles.list}>
-                            {groups.length > 0
-                              ? groups.map((group) =>
-                                  group.items.length > 0 ? (
-                                    <ComboboxPrimitive.Group
-                                      key={group.label}
-                                      className={styles.group}
-                                    >
-                                      <ComboboxPrimitive.GroupLabel
-                                        className={styles.groupLabel}
+                          {groups.length > 0 || items.length > 0 ? (
+                            <ComboboxPrimitive.List className={styles.list}>
+                              {groups.length > 0
+                                ? groups.map((group) =>
+                                    group.items.length > 0 ? (
+                                      <ComboboxPrimitive.Group
+                                        key={group.label}
+                                        className={styles.group}
                                       >
-                                        {group.label}
-                                      </ComboboxPrimitive.GroupLabel>
-                                      {group.items.map(renderItemNode)}
-                                    </ComboboxPrimitive.Group>
-                                  ) : null
-                                )
-                              : items.map(renderItemNode)}
-                          </ComboboxPrimitive.List>
+                                        <ComboboxPrimitive.GroupLabel
+                                          className={styles.groupLabel}
+                                        >
+                                          {group.label}
+                                        </ComboboxPrimitive.GroupLabel>
+                                        {group.items.map(renderItemNode)}
+                                      </ComboboxPrimitive.Group>
+                                    ) : null
+                                  )
+                                : items.map(renderItemNode)}
+                            </ComboboxPrimitive.List>
+                          ) : null}
 
                           {isLoadingComplete &&
                             !hasItems &&
