@@ -2,6 +2,8 @@
 
 A Next.js project with TypeScript, CSS Modules, Base UI, Storybook, and Vitest.
 
+![Betashares website app screenshot](./docs/screenshot.png)
+
 ## Technologies
 
 - **Next.js 15** - React framework

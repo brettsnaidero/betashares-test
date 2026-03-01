@@ -45,11 +45,14 @@ function SearchContent() {
 
   const debouncedQuery = useDebounce(query, 300);
 
+  /* Get count of all active filters */
   const activeFilterCount = useMemo(() => {
     let count = 0;
     for (const value of Object.values(filters)) {
       if (Array.isArray(value)) {
-        if (value.length > 0) count++;
+        if (value.length > 0) {
+          count++;
+        }
       } else if (value && (value.min || value.max)) {
         count++;
       }

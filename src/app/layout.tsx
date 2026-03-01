@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
@@ -37,7 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${rundDisplay.variable} ${rundText.variable}`}>
       <body>
-        <Header />
+        <Suspense>
+          <Header />
+        </Suspense>
         {children}
       </body>
     </html>
