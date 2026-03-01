@@ -6,7 +6,7 @@ import "@/styles/reset.css";
 import "@/styles/variables.css";
 import "@/styles/globals.css";
 
-import { Header } from "@/components/Header";
+import { Header, HeaderSkeleton } from "@/components/Header";
 
 const rundDisplay = localFont({
   src: [{ path: "../../public/fonts/RundDisplay-Medium.woff2", weight: "500" }],
@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   title: "We help Australians build wealth | Betashares",
   description:
     "Betashares, a leading Australian fund manager specialising in ETFs. Over $50 billion under management, we serve over 1 million investors.",
+  icons: [
+    { url: "/favicon-16x16.webp", sizes: "16x16", type: "image/webp" },
+    { url: "/favicon-32x32.webp", sizes: "32x32", type: "image/webp" },
+  ],
 };
 
 export default function RootLayout({
@@ -38,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${rundDisplay.variable} ${rundText.variable}`}>
       <body>
-        <Suspense>
+        <Suspense fallback={<HeaderSkeleton />}>
           <Header />
         </Suspense>
         {children}

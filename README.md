@@ -4,6 +4,8 @@ A Next.js project with TypeScript, CSS Modules, Base UI, Storybook, and Vitest.
 
 ![Betashares website app screenshot](./docs/screenshot.png)
 
+A static version of the app is viewable at <https://brettsnaidero.github.io/betashares-test/>.
+
 ## Technologies
 
 - **Next.js 15** - React framework

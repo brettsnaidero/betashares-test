@@ -180,7 +180,7 @@
   flex: 1;
   justify-content: flex-end;
   align-items: center;
-  gap: var(--spacing-4);
+  gap: var(--spacing-6);
 }
 
 @media (min-width: 1024px) {
@@ -330,4 +330,88 @@
 .mobileNavLink:hover,
 .mobileNavLink:focus {
   color: rgb(var(--color-orange));
+}
+
+/* Loading skeleton styles */
+.skeletonBlock {
+  background-color: rgb(var(--color-platinum));
+  border-radius: var(--radius-sm);
+}
+
+.shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: var(--opacity-full);
+  }
+  50% {
+    opacity: var(--opacity-subtle);
+  }
+}
+
+.skeletonLogo {
+  width: 184px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.skeletonSearchToggle {
+  margin-left: auto;
+  width: var(--size-5);
+  height: var(--size-5);
+  border-radius: var(--radius-full);
+}
+
+@media (min-width: 640px) {
+  .skeletonSearchToggle {
+    display: none;
+  }
+}
+
+.skeletonSearchBar {
+  height: var(--size-5);
+  width: 100%;
+  border-radius: var(--radius-full);
+}
+
+@media (min-width: 640px) {
+  .skeletonSearchBar {
+    height: var(--size-6);
+  }
+}
+
+.skeletonNavLink {
+  width: 60px;
+  height: var(--size-1);
+  border-radius: var(--radius-sm);
+}
+
+.skeletonButton {
+  width: 140px;
+  height: var(--size-5);
+  border-radius: var(--radius-full);
+}
+
+.skeletonMenuButton {
+  width: var(--size-5);
+  height: var(--size-5);
+  border-radius: var(--radius-full);
+}
+
+@media (min-width: 640px) {
+  .skeletonMenuButton {
+    width: var(--size-6);
+    height: var(--size-6);
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeletonMenuButton {
+    display: none;
+  }
 }
