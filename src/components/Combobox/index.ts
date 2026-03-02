@@ -1,2 +1,2 @@
-export { Combobox } from "./Combobox";
-export type { ComboboxProps, ComboboxGroup } from "./Combobox";
+export { SearchAutocomplete } from "./Combobox";
+export type { AutocompleteProps, AutocompleteGroup } from "./Combobox";

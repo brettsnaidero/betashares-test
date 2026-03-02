@@ -10,7 +10,7 @@ import {
 import cn from "classnames";
 import { Autocomplete } from "@base-ui/react/autocomplete";
 import { AnimatePresence, motion } from "motion/react";
-import styles from "./Combobox.module.css";
+import styles from "./SearchAutocomplete.module.css";
 import { LoadingIllustration, LoadingSpinner } from "../Loading";
 
 /* ------------------------------------------------------------------ */

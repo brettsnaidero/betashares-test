@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryFn } from "@storybook/nextjs-vite";
-import { Combobox } from "./Combobox";
+import { SearchAutocomplete } from "./SearchAutocomplete";
 
 interface Fruit {
   id: string;
@@ -19,7 +19,7 @@ const allFruits: Fruit[] = [
 ];
 
 const meta: Meta = {
-  title: "Components/Combobox",
+  title: "Components/SearchAutocomplete",
   parameters: {
     layout: "centered",
   },
@@ -33,7 +33,7 @@ export const Default: StoryFn = () => {
 
   return (
     <div style={{ width: 400 }}>
-      <Combobox<Fruit>
+      <SearchAutocomplete<Fruit>
         items={items}
         onInputValueChange={(value) => {
           const filtered = allFruits.filter((f) =>
@@ -58,7 +58,7 @@ export const Default: StoryFn = () => {
 
 export const Loading: StoryFn = () => (
   <div style={{ width: 400 }}>
-    <Combobox
+    <SearchAutocomplete
       items={[]}
       onInputValueChange={() => {}}
       getItemLabel={() => ""}
@@ -72,7 +72,7 @@ export const Loading: StoryFn = () => (
 
 export const Empty: StoryFn = () => (
   <div style={{ width: 400 }}>
-    <Combobox
+    <SearchAutocomplete
       items={[]}
       onInputValueChange={() => {}}
       getItemLabel={() => ""}
@@ -95,7 +95,7 @@ export const SuggestionsOnFocus: StoryFn = () => {
 
   return (
     <div style={{ width: 400 }}>
-      <Combobox<Fruit>
+      <SearchAutocomplete<Fruit>
         items={items}
         showOnEmpty
         onInputValueChange={(value) => {
@@ -127,7 +127,7 @@ export const SuggestionsOnFocus: StoryFn = () => {
 
 export const Error: StoryFn = () => (
   <div style={{ width: 400 }}>
-    <Combobox
+    <SearchAutocomplete
       items={[]}
       onInputValueChange={() => {}}
       getItemLabel={() => ""}

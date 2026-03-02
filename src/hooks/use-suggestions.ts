@@ -1,24 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { searchProducts, type SearchResult } from "@/lib/search-api";
 import { getPopularSearches } from "@/lib/popular-searches";
-import type { ComboboxGroup } from "@/components/Combobox";
+import type { AutocompleteGroup } from "@/components/SearchAutocomplete";
 import { useDebounce } from "./use-debounce";
 
 const DEBOUNCE_MS = 300;
 const SUGGESTION_SIZE = 10;
 
 interface UseSuggestionsReturn {
-  groups: ComboboxGroup<SearchResult>[];
+  groups: AutocompleteGroup<SearchResult>[];
   isLoading: boolean;
   inputValue: string;
   setInputValue: (value: string) => void;
 }
 
-function groupByKind(results: SearchResult[]): ComboboxGroup<SearchResult>[] {
+function groupByKind(
+  results: SearchResult[]
+): AutocompleteGroup<SearchResult>[] {
   const etfs = results.filter((r) => r.kind === "etf");
   const equities = results.filter((r) => r.kind === "equity");
 
-  const groups: ComboboxGroup<SearchResult>[] = [];
+  const groups: AutocompleteGroup<SearchResult>[] = [];
   if (etfs.length > 0) groups.push({ label: "ETFs", items: etfs });
   if (equities.length > 0) groups.push({ label: "Stocks", items: equities });
   return groups;
@@ -26,8 +28,10 @@ function groupByKind(results: SearchResult[]): ComboboxGroup<SearchResult>[] {
 
 export function useSuggestions(initialValue = ""): UseSuggestionsReturn {
   const [inputValue, setInputValue] = useState(initialValue);
-  const [groups, setGroups] = useState<ComboboxGroup<SearchResult>[]>([]);
-  const [popularGroups, setPopularGroups] = useState<ComboboxGroup<SearchResult>[]>([]);
+  const [groups, setGroups] = useState<AutocompleteGroup<SearchResult>[]>([]);
+  const [popularGroups, setPopularGroups] = useState<
+    AutocompleteGroup<SearchResult>[]
+  >([]);
   const [isLoading, setIsLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 

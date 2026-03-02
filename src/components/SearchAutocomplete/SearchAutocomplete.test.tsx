@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Combobox } from "./Combobox";
+import { SearchAutocomplete } from "./SearchAutocomplete";
 
 const fruits = [
   { id: "1", name: "Apple" },
@@ -16,16 +16,21 @@ const defaultProps = {
   "aria-label": "Search fruits",
 };
 
-describe("Combobox", () => {
+describe("SearchAutocomplete", () => {
   it("renders the input with placeholder", () => {
-    render(<Combobox {...defaultProps} placeholder="Search fruits…" />);
+    render(
+      <SearchAutocomplete {...defaultProps} placeholder="Search fruits…" />
+    );
     expect(screen.getByPlaceholderText("Search fruits…")).toBeInTheDocument();
   });
 
   it("calls onInputValueChange when user types", () => {
     const onInputValueChange = vi.fn();
     render(
-      <Combobox {...defaultProps} onInputValueChange={onInputValueChange} />
+      <SearchAutocomplete
+        {...defaultProps}
+        onInputValueChange={onInputValueChange}
+      />
     );
 
     const input = screen.getByRole("combobox");
@@ -34,18 +39,20 @@ describe("Combobox", () => {
   });
 
   it("renders with custom aria-label", () => {
-    render(<Combobox {...defaultProps} aria-label="Find a fruit" />);
+    render(<SearchAutocomplete {...defaultProps} aria-label="Find a fruit" />);
     expect(screen.getByLabelText("Find a fruit")).toBeInTheDocument();
   });
 
   it("renders combobox input when isLoading", () => {
-    render(<Combobox {...defaultProps} items={[]} isLoading={true} />);
+    render(
+      <SearchAutocomplete {...defaultProps} items={[]} isLoading={true} />
+    );
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
   it("calls onSubmit when Enter is pressed", () => {
     const onSubmit = vi.fn();
-    render(<Combobox {...defaultProps} onSubmit={onSubmit} />);
+    render(<SearchAutocomplete {...defaultProps} onSubmit={onSubmit} />);
 
     const input = screen.getByRole("combobox");
     fireEvent.change(input, { target: { value: "test" } });

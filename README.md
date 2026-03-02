@@ -18,7 +18,7 @@ A Next.js project with TypeScript, CSS Modules, Base UI, Storybook, and Vitest.
 
 ### Search bar accessibility
 
-I have developed the search bar to use a [combobox UI pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), leveraging the `Combobox` primitive from [Base UI](https://base-ui.com/) to simplify the implementation and handle basic keyboard navigation management and other accessibility concerns.
+I have developed the search bar to use a [combobox UI pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), leveraging the `Autocomplete` primitive from [Base UI](https://base-ui.com/react/components/autocomplete) to simplify the implementation and handle basic keyboard navigation management and other accessibility concerns.
 
 ### Animation
 

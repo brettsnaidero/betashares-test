@@ -1,6 +1,6 @@
 export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
-export { Combobox } from "./Combobox";
+export { SearchAutocomplete } from "./SearchAutocomplete";
 export { HighlightText } from "./HighlightText";
 export { ProductCard, ProductCardSkeleton } from "./ProductCard";
 export { Header } from "./Header";
