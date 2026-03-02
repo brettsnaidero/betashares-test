@@ -62,9 +62,16 @@ function SearchContent() {
 
   // Track the last URL we pushed so we can skip the URL→State sync for our own changes
   const lastPushedParams = useRef<string | null>(null);
+  const isFirstMount = useRef(true);
 
   // Sync URL → State (only for external navigation like back/forward)
   useEffect(() => {
+    // Skip on first mount – initial values already came from paramsToFilters
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
     const currentParams = searchParams.toString();
     if (lastPushedParams.current === currentParams) {
       return;
