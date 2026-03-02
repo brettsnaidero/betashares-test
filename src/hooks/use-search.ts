@@ -50,7 +50,7 @@ export function useSearch(
   const [page, setPage] = useState(initialPage);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [count, setCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 

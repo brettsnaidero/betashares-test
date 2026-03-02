@@ -217,12 +217,6 @@ function SearchContent() {
                     <ProductCard key={product.symbol} product={product} />
                   ))}
                 </div>
-                <SearchPagination
-                  page={page}
-                  pageSize={pageSize}
-                  totalCount={count}
-                  onPageChange={handlePageChange}
-                />
               </motion.div>
             ) : (
               <motion.div
@@ -241,6 +235,15 @@ function SearchContent() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {results.length > 0 && !isLoading && (
+            <SearchPagination
+              page={page}
+              pageSize={pageSize}
+              totalCount={count}
+              onPageChange={handlePageChange}
+            />
+          )}
         </main>
       </div>
     </div>
