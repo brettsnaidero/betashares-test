@@ -8,14 +8,10 @@ import {
   useState,
 } from "react";
 import cn from "classnames";
-import { Autocomplete } from "@base-ui/react/autocomplete";
+import { Autocomplete as BaseAutocomplete } from "@base-ui/react/autocomplete";
 import { AnimatePresence, motion } from "motion/react";
-import styles from "./SearchAutocomplete.module.css";
+import styles from "./Autocomplete.module.css";
 import { LoadingIllustration, LoadingSpinner } from "../Loading";
-
-/* ------------------------------------------------------------------ */
-/*  Types                                                              */
-/* ------------------------------------------------------------------ */
 
 export interface AutocompleteGroup<T> {
   label: string;
@@ -73,11 +69,7 @@ type AutocompleteProps<T> =
   | AutocompleteFlatProps<T>
   | AutocompleteGroupedProps<T>;
 
-/* ------------------------------------------------------------------ */
-/*  Component                                                          */
-/* ------------------------------------------------------------------ */
-
-function SearchAutocomplete<T>({
+function Autocomplete<T>({
   onInputValueChange,
   getItemLabel,
   getItemValue,
@@ -181,7 +173,7 @@ function SearchAutocomplete<T>({
     const value = getItemValue(item);
 
     return (
-      <Autocomplete.Item
+      <BaseAutocomplete.Item
         key={value}
         value={item}
         className={styles.item}
@@ -190,12 +182,12 @@ function SearchAutocomplete<T>({
         {renderItem
           ? renderItem(item, inputValueRef.current)
           : getItemLabel(item)}
-      </Autocomplete.Item>
+      </BaseAutocomplete.Item>
     );
   };
 
   return (
-    <Autocomplete.Root
+    <BaseAutocomplete.Root
       value={inputValue}
       onValueChange={handleValueChange}
       open={isOpen}
@@ -211,7 +203,7 @@ function SearchAutocomplete<T>({
               {icon}
             </span>
           )}
-          <Autocomplete.Input
+          <BaseAutocomplete.Input
             ref={inputRef}
             className={cn(styles.input, {
               [styles.inputWithIcon]: !!icon,
@@ -241,8 +233,11 @@ function SearchAutocomplete<T>({
           </AnimatePresence>
         </div>
 
-        <Autocomplete.Portal keepMounted>
-          <Autocomplete.Positioner className={styles.positioner} sideOffset={4}>
+        <BaseAutocomplete.Portal keepMounted>
+          <BaseAutocomplete.Positioner
+            className={styles.positioner}
+            sideOffset={4}
+          >
             <AnimatePresence>
               {/* Loading indicator for initial load */}
               {isOpen && (
@@ -252,7 +247,7 @@ function SearchAutocomplete<T>({
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
                 >
-                  <Autocomplete.Popup className={styles.popup}>
+                  <BaseAutocomplete.Popup className={styles.popup}>
                     <AnimatePresence mode="wait">
                       {isError ? (
                         <motion.div
@@ -288,52 +283,51 @@ function SearchAutocomplete<T>({
                           transition={{ duration: 0.2 }}
                         >
                           {groups.length > 0 || items.length > 0 ? (
-                            <Autocomplete.List className={styles.list}>
+                            <BaseAutocomplete.List className={styles.list}>
                               {groups.length > 0
                                 ? groups.map((group) =>
                                     group.items.length > 0 ? (
-                                      <Autocomplete.Group
+                                      <BaseAutocomplete.Group
                                         key={group.label}
                                         className={styles.group}
                                       >
-                                        <Autocomplete.GroupLabel
+                                        <BaseAutocomplete.GroupLabel
                                           className={styles.groupLabel}
                                         >
                                           {group.label}
-                                        </Autocomplete.GroupLabel>
+                                        </BaseAutocomplete.GroupLabel>
                                         {group.items.map(renderItemNode)}
-                                      </Autocomplete.Group>
+                                      </BaseAutocomplete.Group>
                                     ) : null
                                   )
                                 : items.map(renderItemNode)}
-                            </Autocomplete.List>
+                            </BaseAutocomplete.List>
                           ) : null}
 
                           {isLoadingComplete &&
                             !hasItems &&
                             inputValueRef.current.trim() !== "" && (
-                              <Autocomplete.Empty className={styles.empty}>
+                              <BaseAutocomplete.Empty className={styles.empty}>
                                 {emptyMessage}
-                              </Autocomplete.Empty>
+                              </BaseAutocomplete.Empty>
                             )}
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </Autocomplete.Popup>
+                  </BaseAutocomplete.Popup>
                 </motion.div>
               )}
             </AnimatePresence>
-          </Autocomplete.Positioner>
-        </Autocomplete.Portal>
+          </BaseAutocomplete.Positioner>
+        </BaseAutocomplete.Portal>
       </div>
-    </Autocomplete.Root>
+    </BaseAutocomplete.Root>
   );
 }
 
-export { SearchAutocomplete };
+export { Autocomplete };
 export type {
   AutocompleteProps,
   AutocompleteFlatProps,
   AutocompleteGroupedProps,
-  AutocompleteGroup,
 };

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { searchProducts, type SearchResult } from "@/lib/search-api";
 import { getPopularSearches } from "@/lib/popular-searches";
-import type { AutocompleteGroup } from "@/components/SearchAutocomplete";
+import type { AutocompleteGroup } from "@/components/Autocomplete";
 import { useDebounce } from "./use-debounce";
 
 const DEBOUNCE_MS = 300;

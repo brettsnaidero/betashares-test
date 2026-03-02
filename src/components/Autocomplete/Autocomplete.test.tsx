@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { SearchAutocomplete } from "./SearchAutocomplete";
+import { Autocomplete } from "./Autocomplete";
 
 const fruits = [
   { id: "1", name: "Apple" },
@@ -16,21 +16,16 @@ const defaultProps = {
   "aria-label": "Search fruits",
 };
 
-describe("SearchAutocomplete", () => {
+describe("Autocomplete", () => {
   it("renders the input with placeholder", () => {
-    render(
-      <SearchAutocomplete {...defaultProps} placeholder="Search fruits…" />
-    );
+    render(<Autocomplete {...defaultProps} placeholder="Search fruits…" />);
     expect(screen.getByPlaceholderText("Search fruits…")).toBeInTheDocument();
   });
 
   it("calls onInputValueChange when user types", () => {
     const onInputValueChange = vi.fn();
     render(
-      <SearchAutocomplete
-        {...defaultProps}
-        onInputValueChange={onInputValueChange}
-      />
+      <Autocomplete {...defaultProps} onInputValueChange={onInputValueChange} />
     );
 
     const input = screen.getByRole("combobox");
@@ -39,20 +34,18 @@ describe("SearchAutocomplete", () => {
   });
 
   it("renders with custom aria-label", () => {
-    render(<SearchAutocomplete {...defaultProps} aria-label="Find a fruit" />);
+    render(<Autocomplete {...defaultProps} aria-label="Find a fruit" />);
     expect(screen.getByLabelText("Find a fruit")).toBeInTheDocument();
   });
 
   it("renders combobox input when isLoading", () => {
-    render(
-      <SearchAutocomplete {...defaultProps} items={[]} isLoading={true} />
-    );
+    render(<Autocomplete {...defaultProps} items={[]} isLoading={true} />);
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
   it("calls onSubmit when Enter is pressed", () => {
     const onSubmit = vi.fn();
-    render(<SearchAutocomplete {...defaultProps} onSubmit={onSubmit} />);
+    render(<Autocomplete {...defaultProps} onSubmit={onSubmit} />);
 
     const input = screen.getByRole("combobox");
     fireEvent.change(input, { target: { value: "test" } });

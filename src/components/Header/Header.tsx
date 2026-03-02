@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import cn from "classnames";
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { BetasharesLogo } from "@/components/BetasharesLogo";
-import { SearchAutocomplete } from "@/components/SearchAutocomplete";
+import { Autocomplete } from "@/components/Autocomplete";
 import { HighlightText } from "@/components/HighlightText";
 import { Drawer } from "@/components/Drawer";
 import { useSuggestions } from "@/hooks/use-suggestions";
@@ -79,7 +79,7 @@ function Header() {
           transition={{ duration: 0.2, ease: "easeInOut" }}
         >
           <div className={styles.searchInner}>
-            <SearchAutocomplete<SearchResult>
+            <Autocomplete<SearchResult>
               groups={groups}
               showOnEmpty
               defaultInputValue={defaultQuery}
