@@ -52,7 +52,7 @@
 
 /* Search — animated on mobile via motion, always visible on desktop */
 .search {
-  display: none;
+  display: block;
   order: 99;
   width: 100%;
   overflow: hidden;
