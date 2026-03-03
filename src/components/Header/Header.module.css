@@ -58,6 +58,10 @@
   overflow: hidden;
 }
 
+.search[data-open="false"] {
+  visibility: hidden;
+}
+
 .searchInner {
   padding-top: var(--spacing-4);
 }
@@ -72,6 +76,7 @@
     overflow: visible !important;
     height: auto !important;
     opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .searchInner {

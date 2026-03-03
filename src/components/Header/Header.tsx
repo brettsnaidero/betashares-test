@@ -77,7 +77,7 @@ function Header() {
               : { height: 0, opacity: 0 }
           }
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          inert={!searchOpen ? true : undefined}
+          data-open={searchOpen}
         >
           <div className={styles.searchInner}>
             <Autocomplete<SearchResult>
